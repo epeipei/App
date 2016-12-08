@@ -90,9 +90,13 @@ public final class BuildAction implements ActionListener {
              //生成可执行文件
              localExec.exe(step2);//将语法分析文件和插桩后的文件编译生成插桩后的可执行文件
         }else if(Contents.Cov_Flag.equals(Contents.PATH)){//简单路径覆盖,不会将条件拆分的
-            Path path=new Path();
-            LocalExec localExec=new LocalExec(Contents.USER_DIR__STRING+"/path");
-            localExec.exe(path.getBuildStep1());
+//            Path path=new Path();
+//            LocalExec localExec=new LocalExec(Contents.USER_DIR__STRING+"/path");
+//            localExec.exe(path.getBuildStep1());
+              Statement statement=new Statement();
+              LocalExec localExec=new LocalExec(Contents.USER_DIR__STRING+"/path");
+              localExec.exe(statement.getBuildStep1());
+              localExec.exe(statement.getBuildStep2());
         }
         else {
             

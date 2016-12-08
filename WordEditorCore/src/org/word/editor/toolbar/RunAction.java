@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Map;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.text.html.HTML;
 import org.apache.log4j.Logger;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
@@ -133,6 +132,21 @@ public final class RunAction implements ActionListener {
                 //利用生成的list生成覆盖信息报告
                 HtmlViewTopComponent tp=new HtmlViewTopComponent();
                 tp.setText(HtmlUtility.generateHtml(covMap, file.getAbsolutePath()));
+                tp.open();
+                tp.requestActive();
+            }
+        }else if(Contents.Cov_Flag.equals(Contents.PATH)){//简单路径覆盖，不会将复合条件进行拆分
+            localExec=new LocalExec(Contents.USER_DIR__STRING+"/path");
+            out=Contents.USER_DIR__STRING+"/path/output.txt";
+            boolean result=runWithCases(localExec, out);
+            if(result){
+                String simpleName=file.getName().substring(0,file.getName().indexOf("."));//只有文件的名字无后缀
+                localExec.exe("gcov "+file.getName());
+                String gcov=Contents.USER_DIR__STRING+"/path/"+simpleName+".c.gcov";//生成的覆盖文件
+                //显示覆盖文件
+                HtmlViewTopComponent tp=new HtmlViewTopComponent();
+                tp.setName("Coverage Report For "+file.getName());
+                tp.setText(HtmlUtility.statementCov(gcov));
                 tp.open();
                 tp.requestActive();
             }

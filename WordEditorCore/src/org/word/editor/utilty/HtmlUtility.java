@@ -14,6 +14,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.apache.log4j.Logger;
 import org.openide.util.Exceptions;
+import org.word.editor.core.Contents;
 import org.word.editor.utilty.FileUtility.Cond;
 
 /**
@@ -133,7 +134,11 @@ public class HtmlUtility {
                     parts[2]=parts[2].replaceAll("<", "&lt;");
                     if(parts[0].trim().equals("#####")||parts[0].trim().equals("-")){//
                         //未达到的语句
-                        sb.append(parts[2]+"\n");
+//                        if(Contents.Cov_Flag.equals(Contents.PATH)&&){
+//                            
+//                        }
+//                        sb.append(parts[2]+"\n");
+                          sb.append("<strong style=\"background:#FFC0CB\">"+parts[2]+"</strong>\n");
                     }else{//测试用例达到的语句
                         for(int i=0;i<parts[2].length();i++){//防止空白区域着色
                             if(parts[2].charAt(i)==' '){//等于空白
@@ -144,11 +149,10 @@ public class HtmlUtility {
                                 break;
                             }
                         }//end-for
-                        sb.append("<strong style=\"background:green\">"+parts[2].trim()+"</strong>\n");
+                        sb.append("<strong style=\"background:#7CCD7C\">"+parts[2].trim()+"</strong>\n");
 //                          sb.append(parts[2]+"\n");
                     }
                 }
-
                // sb.append("\n");
             }
         } catch (Exception e) {
