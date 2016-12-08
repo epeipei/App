@@ -1,0 +1,89 @@
+
+mycov 28 1 0 argc<4
+
+mycov 4 1 1 a+b>c
+
+mycov 4 2 0 b+c>a
+不构成三角形
+0
+mycov 28 1 0 argc<4
+
+mycov 4 1 1 a+b>c
+
+mycov 4 2 1 b+c>a
+
+mycov 4 3 1 a+c>b
+
+mycov 5 1 1 a==b
+
+mycov 6 1 1 b==c
+等边三角形
+0
+mycov 28 1 0 argc<4
+
+mycov 4 1 1 a+b>c
+
+mycov 4 2 1 b+c>a
+
+mycov 4 3 1 a+c>b
+
+mycov 5 1 1 a==b
+
+mycov 6 1 0 b==c
+等腰三角形
+0
+mycov 28 1 0 argc<4
+
+mycov 4 1 1 a+b>c
+
+mycov 4 2 1 b+c>a
+
+mycov 4 3 1 a+c>b
+
+mycov 5 1 0 a==b
+
+mycov 12 1 0 b==c
+
+mycov 15 1 0 c==a
+不等边三角形
+0
+mycov 28 1 0 argc<4
+
+mycov 4 1 1 a+b>c
+
+mycov 4 2 1 b+c>a
+
+mycov 4 3 1 a+c>b
+
+mycov 5 1 0 a==b
+
+mycov 12 1 0 b==c
+
+mycov 15 1 0 c==a
+不等边三角形
+0
+mycov 28 1 0 argc<4
+
+mycov 4 1 1 a+b>c
+
+mycov 4 2 1 b+c>a
+
+mycov 4 3 1 a+c>b
+
+mycov 5 1 0 a==b
+
+mycov 12 1 0 b==c
+
+mycov 15 1 0 c==a
+不等边三角形
+0
+mycov 28 1 0 argc<4
+
+mycov 4 1 0 a+b>c
+不构成三角形
+0
+mycov 28 1 0 argc<4
+
+mycov 4 1 0 a+b>c
+不构成三角形
+0

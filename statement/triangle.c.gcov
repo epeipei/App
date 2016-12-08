@@ -1,0 +1,42 @@
+        -:    0:Source:/home/xiao/Test/lex/condition/triangle.c
+        -:    0:Graph:triangle.gcno
+        -:    0:Data:triangle.gcda
+        -:    0:Runs:8
+        -:    0:Programs:1
+        -:    1:#include<stdio.h>
+        -:    2:#include<stdbool.h>
+        8:    3:bool judge(int a,int b,int c){
+        8:    4:	if(a+b>c&&b+c>a&&a+c>b){
+       10:    5:		if(a==b){
+        2:    6:			if(b==c){
+        1:    7:				printf("等边三角形\n");
+        -:    8:			}else{
+        1:    9:				printf("等腰三角形\n");
+        -:   10:			}
+        -:   11:		}else{
+        3:   12:			if(b==c){
+    #####:   13:				printf("等腰三角形\n");
+        -:   14:			}else{
+        3:   15:				if(c==a){
+    #####:   16:					printf("等腰三角形\n");
+        -:   17:				}else{
+        3:   18:					printf("不等边三角形\n");
+        -:   19:				}
+        -:   20:			}
+        -:   21:		}
+        -:   22:	}else{
+        3:   23:		printf("不构成三角形\n");
+        -:   24:	}
+        8:   25:	return 0;
+        -:   26:}
+        8:   27:int main(int argc,char *argv[]){
+        8:   28:	if(argc<4){
+    #####:   29:		printf("需要三个参数\n");
+    #####:   30:		return 0;
+        -:   31:	}
+        8:   32:	int a=atoi(argv[1]);
+        8:   33:	int b=atoi(argv[2]);
+        8:   34:	int c=atoi(argv[3]);
+        8:   35:	printf("%d",judge(a,b,c));
+        8:   36:	return 0;
+        -:   37:}

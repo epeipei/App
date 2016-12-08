@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><module codename="org.word.editor.core">
+    <module_version install_time="1480910012436" last="true" origin="installer" specification_version="1.0">
+        <file crc="3402755310" name="config/Modules/org-word-editor-core.xml"/>
+        <file crc="104118116" name="modules/ext/log4j-1.2-api-2.7.jar"/>
+        <file crc="972798868" name="modules/ext/log4j-1.2.16.jar"/>
+        <file crc="498662583" name="modules/ext/rsyntaxtextarea-2.5.8.jar"/>
+        <file crc="4107879329" name="modules/org-word-editor-core.jar"/>
+    </module_version>
+</module>
