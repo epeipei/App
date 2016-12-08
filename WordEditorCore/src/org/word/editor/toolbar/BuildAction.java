@@ -18,6 +18,7 @@ import org.openide.util.NbBundle.Messages;
 import org.word.editor.core.Branch;
 import org.word.editor.core.Condition;
 import org.word.editor.core.Contents;
+import org.word.editor.core.Path;
 import org.word.editor.core.Statement;
 import org.word.editor.utilty.LocalExec;
 
@@ -88,7 +89,12 @@ public final class BuildAction implements ActionListener {
              localExec.exe(step1); //生成插桩以后的文件
              //生成可执行文件
              localExec.exe(step2);//将语法分析文件和插桩后的文件编译生成插桩后的可执行文件
-        }else {
+        }else if(Contents.Cov_Flag.equals(Contents.PATH)){//简单路径覆盖,不会将条件拆分的
+            Path path=new Path();
+            LocalExec localExec=new LocalExec(Contents.USER_DIR__STRING+"/path");
+            localExec.exe(path.getBuildStep1());
+        }
+        else {
             
         }
         JOptionPane.showMessageDialog(null, "插桩并且编译完成！");
