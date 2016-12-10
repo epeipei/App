@@ -1,11 +1,11 @@
 -------------------------------------------------------------------------------
->Log Session: Monday, December 5, 2016 11:53:33 AM CST
+>Log Session: Saturday, December 10, 2016 10:10:58 PM CST
 >System Info: 
   Product Version         = App 201510222201
-  Operating System        = Linux version 4.2.0-27-generic running on amd64
-  Java; VM; Vendor        = 1.7.0_101; OpenJDK 64-Bit Server VM 24.95-b01; Oracle Corporation
-  Runtime                 = OpenJDK Runtime Environment 1.7.0_101-b00
-  Java Home               = /usr/lib/jvm/java-7-openjdk-amd64/jre
+  Operating System        = Linux version 4.2.0-42-generic running on amd64
+  Java; VM; Vendor        = 1.7.0_80; Java HotSpot(TM) 64-Bit Server VM 24.80-b11; Oracle Corporation
+  Runtime                 = Java(TM) SE Runtime Environment 1.7.0_80-b15
+  Java Home               = /usr/lib/jvm/jdk1.7.0_80/jre
   System Locale; Encoding = en_US (app); UTF-8
   Home Directory          = /home/xiao
   Current Directory       = /home/xiao/NetBeansProjects/App
@@ -15,8 +15,8 @@
                             /usr/local/netbeans-8.1/ide
                             /usr/local/netbeans-8.1/platform
                             /usr/local/netbeans-8.1/platform
-  Boot & Ext. Classpath   = /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/resources.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rt.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/sunrsasign.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/jsse.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/jce.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/charsets.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rhino.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/jfr.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/classes:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/ext/icedtea-sound.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/ext/zipfs.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/ext/java-atk-wrapper.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/ext/dnsns.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/ext/sunjce_provider.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/ext/localedata.jar:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/ext/sunpkcs11.jar
-  Application Classpath   = /usr/local/netbeans-8.1/platform/lib/boot.jar:/usr/local/netbeans-8.1/platform/lib/org-openide-modules.jar:/usr/local/netbeans-8.1/platform/lib/org-openide-util-lookup.jar:/usr/local/netbeans-8.1/platform/lib/org-openide-util-ui.jar:/usr/local/netbeans-8.1/platform/lib/org-openide-util.jar:/usr/local/netbeans-8.1/platform/lib/locale/boot_ja.jar:/usr/local/netbeans-8.1/platform/lib/locale/boot_pt_BR.jar:/usr/local/netbeans-8.1/platform/lib/locale/boot_ru.jar:/usr/local/netbeans-8.1/platform/lib/locale/boot_zh_CN.jar:/usr/local/netbeans-8.1/platform/lib/locale/org-openide-modules_ja.jar:/usr/local/netbeans-8.1/platform/lib/locale/org-openide-modules_pt_BR.jar:/usr/local/netbeans-8.1/platform/lib/locale/org-openide-modules_ru.jar:/usr/local/netbeans-8.1/platform/lib/locale/org-openide-modules_zh_CN.jar:/usr/local/netbeans-8.1/platform/lib/locale/org-openide-util-lookup_ja.jar:/usr/local/netbeans-8.1/platform/lib/locale/org-openide-util-lookup_pt_BR.jar:/usr/local/netbeans-8.1/platform/lib/locale/org-openide-util-lookup_ru.jar:/usr/local/netbeans-8.1/platform/lib/locale/org-openide-util-lookup_zh_CN.jar:/usr/local/netbeans-8.1/platform/lib/locale/org-openide-util-ui_ja.jar:/usr/local/netbeans-8.1/platform/lib/locale/org-openide-util-ui_pt_BR.jar:/usr/local/netbeans-8.1/platform/lib/locale/org-openide-util-ui_ru.jar:/usr/local/netbeans-8.1/platform/lib/locale/org-openide-util-ui_zh_CN.jar:/usr/local/netbeans-8.1/platform/lib/locale/org-openide-util_ja.jar:/usr/local/netbeans-8.1/platform/lib/locale/org-openide-util_pt_BR.jar:/usr/local/netbeans-8.1/platform/lib/locale/org-openide-util_ru.jar:/usr/local/netbeans-8.1/platform/lib/locale/org-openide-util_zh_CN.jar:/usr/lib/jvm/java-7-openjdk-amd64/lib/dt.jar:/usr/lib/jvm/java-7-openjdk-amd64/lib/tools.jar
+  Boot & Ext. Classpath   = /usr/lib/jvm/jdk1.7.0_80/jre/lib/resources.jar:/usr/lib/jvm/jdk1.7.0_80/jre/lib/rt.jar:/usr/lib/jvm/jdk1.7.0_80/jre/lib/sunrsasign.jar:/usr/lib/jvm/jdk1.7.0_80/jre/lib/jsse.jar:/usr/lib/jvm/jdk1.7.0_80/jre/lib/jce.jar:/usr/lib/jvm/jdk1.7.0_80/jre/lib/charsets.jar:/usr/lib/jvm/jdk1.7.0_80/jre/lib/jfr.jar:/usr/lib/jvm/jdk1.7.0_80/jre/classes:/usr/lib/jvm/jdk1.7.0_80/jre/lib/ext/sunec.jar:/usr/lib/jvm/jdk1.7.0_80/jre/lib/ext/zipfs.jar:/usr/lib/jvm/jdk1.7.0_80/jre/lib/ext/dnsns.jar:/usr/lib/jvm/jdk1.7.0_80/jre/lib/ext/sunjce_provider.jar:/usr/lib/jvm/jdk1.7.0_80/jre/lib/ext/localedata.jar:/usr/lib/jvm/jdk1.7.0_80/jre/lib/ext/sunpkcs11.jar
+  Application Classpath   = /usr/local/netbeans-8.1/platform/lib/boot.jar:/usr/local/netbeans-8.1/platform/lib/org-openide-modules.jar:/usr/local/netbeans-8.1/platform/lib/org-openide-util-lookup.jar:/usr/local/netbeans-8.1/platform/lib/org-openide-util-ui.jar:/usr/local/netbeans-8.1/platform/lib/org-openide-util.jar:/usr/local/netbeans-8.1/platform/lib/locale/boot_ja.jar:/usr/local/netbeans-8.1/platform/lib/locale/boot_pt_BR.jar:/usr/local/netbeans-8.1/platform/lib/locale/boot_ru.jar:/usr/local/netbeans-8.1/platform/lib/locale/boot_zh_CN.jar:/usr/local/netbeans-8.1/platform/lib/locale/org-openide-modules_ja.jar:/usr/local/netbeans-8.1/platform/lib/locale/org-openide-modules_pt_BR.jar:/usr/local/netbeans-8.1/platform/lib/locale/org-openide-modules_ru.jar:/usr/local/netbeans-8.1/platform/lib/locale/org-openide-modules_zh_CN.jar:/usr/local/netbeans-8.1/platform/lib/locale/org-openide-util-lookup_ja.jar:/usr/local/netbeans-8.1/platform/lib/locale/org-openide-util-lookup_pt_BR.jar:/usr/local/netbeans-8.1/platform/lib/locale/org-openide-util-lookup_ru.jar:/usr/local/netbeans-8.1/platform/lib/locale/org-openide-util-lookup_zh_CN.jar:/usr/local/netbeans-8.1/platform/lib/locale/org-openide-util-ui_ja.jar:/usr/local/netbeans-8.1/platform/lib/locale/org-openide-util-ui_pt_BR.jar:/usr/local/netbeans-8.1/platform/lib/locale/org-openide-util-ui_ru.jar:/usr/local/netbeans-8.1/platform/lib/locale/org-openide-util-ui_zh_CN.jar:/usr/local/netbeans-8.1/platform/lib/locale/org-openide-util_ja.jar:/usr/local/netbeans-8.1/platform/lib/locale/org-openide-util_pt_BR.jar:/usr/local/netbeans-8.1/platform/lib/locale/org-openide-util_ru.jar:/usr/local/netbeans-8.1/platform/lib/locale/org-openide-util_zh_CN.jar:/usr/lib/jvm/jdk1.7.0_80/lib/dt.jar:/usr/lib/jvm/jdk1.7.0_80/lib/tools.jar
   Startup Classpath       = /usr/local/netbeans-8.1/platform/core/org-netbeans-libs-asm.jar:/usr/local/netbeans-8.1/platform/core/core.jar:/usr/local/netbeans-8.1/platform/core/asm-all-5.0.1.jar:/usr/local/netbeans-8.1/platform/core/org-openide-filesystems-compat8.jar:/usr/local/netbeans-8.1/platform/core/core-base.jar:/usr/local/netbeans-8.1/platform/core/org-openide-filesystems.jar:/usr/local/netbeans-8.1/platform/core/locale/core-base_pt_BR.jar:/usr/local/netbeans-8.1/platform/core/locale/core-base_ja.jar:/usr/local/netbeans-8.1/platform/core/locale/org-netbeans-libs-asm_pt_BR.jar:/usr/local/netbeans-8.1/platform/core/locale/org-openide-filesystems-compat8_ja.jar:/usr/local/netbeans-8.1/platform/core/locale/core_zh_CN.jar:/usr/local/netbeans-8.1/platform/core/locale/org-netbeans-libs-asm_ja.jar:/usr/local/netbeans-8.1/platform/core/locale/core_ru.jar:/usr/local/netbeans-8.1/platform/core/locale/org-openide-filesystems_zh_CN.jar:/usr/local/netbeans-8.1/platform/core/locale/org-openide-filesystems_ja.jar:/usr/local/netbeans-8.1/platform/core/locale/org-openide-filesystems-compat8_pt_BR.jar:/usr/local/netbeans-8.1/platform/core/locale/org-netbeans-libs-asm_ru.jar:/usr/local/netbeans-8.1/platform/core/locale/org-openide-filesystems_ru.jar:/usr/local/netbeans-8.1/platform/core/locale/core-base_zh_CN.jar:/usr/local/netbeans-8.1/platform/core/locale/core_ja.jar:/usr/local/netbeans-8.1/platform/core/locale/org-netbeans-libs-asm_zh_CN.jar:/usr/local/netbeans-8.1/platform/core/locale/org-openide-filesystems-compat8_ru.jar:/usr/local/netbeans-8.1/platform/core/locale/org-openide-filesystems_pt_BR.jar:/usr/local/netbeans-8.1/platform/core/locale/core_pt_BR.jar:/usr/local/netbeans-8.1/platform/core/locale/core-base_ru.jar:/usr/local/netbeans-8.1/platform/core/locale/org-openide-filesystems-compat8_zh_CN.jar:/home/xiao/NetBeansProjects/App/build/cluster/core/locale/core_app.jar
 -------------------------------------------------------------------------------
 INFO [org.netbeans.core.startup.NbEvents]: Turning on modules:
@@ -57,7 +57,7 @@ INFO [org.netbeans.core.startup.NbEvents]: Turning on modules:
 	org.netbeans.modules.options.api/1 [1.44.1 201510222201]
 	org.netbeans.modules.settings/1 [1.48.1 201510222201]
 	org.netbeans.core.windows/2 [2.80.1 201510222201]
-	org.word.editor.core [1.0 161205]
+	org.word.editor.core [1.0 161210]
 	org.openide.filesystems.compat8 [9.7.1 201510222201]
 	org.netbeans.modules.progress.ui [1.32.1 201510222201]
 	org.netbeans.modules.print [7.25.1 201510222201]
@@ -89,7 +89,7 @@ WARNING [org.openide.filesystems.Ordering]: Not all children in Toolbars/ marked
 INFO [org.netbeans.ui.metrics.laf]: USG_LOOK_AND_FEEL
 Diagnostic information
 Input arguments:
-	-Djdk.home=/usr/lib/jvm/java-7-openjdk-amd64
+	-Djdk.home=/usr/lib/jvm/jdk1.7.0_80
 	-Dnetbeans.running.environment=gnome
 	-Dnetbeans.dirs=/home/xiao/NetBeansProjects/App/build/cluster:/usr/local/netbeans-8.1/ide:/usr/local/netbeans-8.1/platform
 	-Dnetbeans.home=/usr/local/netbeans-8.1/platform
@@ -99,12 +99,10 @@ Input arguments:
 	-XX:HeapDumpPath=/home/xiao/NetBeansProjects/App/build/testuserdir/var/log/heapdump.hprof
 Compiler: HotSpot 64-Bit Tiered Compilers
 Heap memory usage: initial 60.5MB maximum 860.5MB
-Non heap memory usage: initial 23.4MB maximum 214.0MB
+Non heap memory usage: initial 23.4MB maximum 130.0MB
 Garbage collector: PS Scavenge (Collections=5 Total time spent=0s)
 Garbage collector: PS MarkSweep (Collections=0 Total time spent=0s)
-Classes: loaded=4407 total loaded=4407 unloaded 0
-INFO [org.netbeans.core.ui.warmup.DiagnosticTask]: Total memory 4,059,291,648
-INFO [null]: Total physical memory 4,059,291,648
+Classes: loaded=4468 total loaded=4468 unloaded 0
+INFO [org.netbeans.core.ui.warmup.DiagnosticTask]: Total memory 4,059,250,688
+INFO [null]: Total physical memory 4,059,250,688
 WARNING [org.openide.filesystems.Ordering]: Not all children in Menu/Window/ marked with the position attribute: [org-word-editor-explore-ProjectExploreTopComponent.shadow], but some are: [org-netbeans-core-io-ui-IOWindowAction.shadow, SwitchToRecentDocumentAction.shadow, Web, Tools, Separator3.instance, ConfigureWindow, org-netbeans-core-windows-actions-ResetWindowsAction.shadow, Separator4.instance, CloseWindowAction.shadow, CloseAllDocumentsAction.shadow, CloseAllButThisAction.shadow, GroupsMenuAction.shadow, DocumentsAction.shadow]
-WARNING [org.netbeans.core.TimableEventQueue]: too much time in AWT thread null
-WARNING [null]: Last record repeated again.

@@ -13,6 +13,10 @@
                     <!--org.word.editor.core.WordTopComponent-->
                     <attr name="hint.originalPublicID" stringvalue="-//org.word.editor.core//Word//EN"/>
                 </file>
+                <file name="WebView" url="nbres:/org/netbeans/modules/settings/resources/properties-1_0.dtd">
+                    <!--org.word.editor.core.WebViewTopComponent-->
+                    <attr name="hint.originalPublicID" stringvalue="-//org.word.editor.core//WebView//EN"/>
+                </file>
             </folder>
             <folder name="org_word_editor_explore">
                 <file name="ProjectExplore" url="nbres:/org/netbeans/modules/settings/resources/properties-1_0.dtd">
@@ -33,6 +37,10 @@
                             <file name="WordTopComponent">
                                 <!--org.word.editor.core.WordTopComponent-->
                                 <attr name="settings.providerPath" stringvalue="xml/lookups//org_word_editor_core/Word.instance"/>
+                            </file>
+                            <file name="WebViewTopComponent">
+                                <!--org.word.editor.core.WebViewTopComponent-->
+                                <attr name="settings.providerPath" stringvalue="xml/lookups//org_word_editor_core/WebView.instance"/>
                             </file>
                         </folder>
                         <folder name="explore">
@@ -65,6 +73,16 @@
                         methodvalue="org.netbeans.api.settings.Factory.properties" name="settings.convertor"/>
                     <attr name="settings.instanceClass" stringvalue="org.word.editor.core.WordTopComponent"/>
                     <attr name="settings.instanceOf" stringvalue="org.word.editor.core.WordTopComponent"/>
+                    <attr boolvalue="true" name="xmlproperties.preventStoring"/>
+                </file>
+                <file name="WebView.instance">
+                    <!--org.word.editor.core.WebViewTopComponent-->
+                    <attr
+                        methodvalue="org.netbeans.api.settings.Factory.create" name="instanceCreate"/>
+                    <attr
+                        methodvalue="org.netbeans.api.settings.Factory.properties" name="settings.convertor"/>
+                    <attr name="settings.instanceClass" stringvalue="org.word.editor.core.WebViewTopComponent"/>
+                    <attr name="settings.instanceOf" stringvalue="org.word.editor.core.WebViewTopComponent"/>
                     <attr boolvalue="true" name="xmlproperties.preventStoring"/>
                 </file>
             </folder>
@@ -211,6 +229,13 @@
   <instance class="org.word.editor.explore.ProjectExploreTopComponent"/>
 </settings>
 ]]></file>
+            <file name="WebViewTopComponent.settings">
+                <!--org.word.editor.core.WebViewTopComponent--><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE settings PUBLIC "-//NetBeans//DTD Session settings 1.0//EN" "http://www.netbeans.org/dtds/sessionsettings-1_0.dtd">
+<settings version="1.0">
+  <instance class="org.word.editor.core.WebViewTopComponent"/>
+</settings>
+]]></file>
         </folder>
         <folder name="Modes">
             <folder name="editor">
@@ -227,6 +252,14 @@
 <!DOCTYPE tc-ref PUBLIC "-//NetBeans//DTD Top Component in Mode Properties 2.0//EN" "http://www.netbeans.org/dtds/tc-ref2_0.dtd">
 <tc-ref version="2.0">
   <tc-id id="WordTopComponent"/>
+  <state opened="false"/>
+</tc-ref>
+]]></file>
+                <file name="WebViewTopComponent.wstcref">
+                    <!--org.word.editor.core.WebViewTopComponent--><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tc-ref PUBLIC "-//NetBeans//DTD Top Component in Mode Properties 2.0//EN" "http://www.netbeans.org/dtds/tc-ref2_0.dtd">
+<tc-ref version="2.0">
+  <tc-id id="WebViewTopComponent"/>
   <state opened="false"/>
 </tc-ref>
 ]]></file>

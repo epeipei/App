@@ -24,6 +24,20 @@ class Bundle {
         return org.openide.util.NbBundle.getMessage(Bundle.class, "CTL_NewFileAction");
     }
     /**
+     * @return <i>WebView</i>
+     * @see WebViewTopComponent
+     */
+    static String CTL_WebViewAction() {
+        return org.openide.util.NbBundle.getMessage(Bundle.class, "CTL_WebViewAction");
+    }
+    /**
+     * @return <i>WebView Window</i>
+     * @see WebViewTopComponent
+     */
+    static String CTL_WebViewTopComponent() {
+        return org.openide.util.NbBundle.getMessage(Bundle.class, "CTL_WebViewTopComponent");
+    }
+    /**
      * @return <i>Word</i>
      * @see WordTopComponent
      */
@@ -43,6 +57,13 @@ class Bundle {
      */
     static String HINT_HtmlViewTopComponent() {
         return org.openide.util.NbBundle.getMessage(Bundle.class, "HINT_HtmlViewTopComponent");
+    }
+    /**
+     * @return <i>This is a WebView window</i>
+     * @see WebViewTopComponent
+     */
+    static String HINT_WebViewTopComponent() {
+        return org.openide.util.NbBundle.getMessage(Bundle.class, "HINT_WebViewTopComponent");
     }
     /**
      * @return <i>This is a Word window</i>

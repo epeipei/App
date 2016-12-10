@@ -2,9 +2,9 @@
 <!DOCTYPE attributes PUBLIC "-//NetBeans//DTD DefaultAttributes 1.0//EN" "http://www.netbeans.org/dtds/attributes-1_0.dtd">
 <attributes version="1.0">
     <fileobject name="editor">
-        <attr name="WinSys-TCRef-Order" stringvalue="HtmlViewTopComponent/WordTopComponent"/>
+        <attr name="WinSys-TCRef-Order" stringvalue="WebViewTopComponent_9/WebViewTopComponent_10/HtmlViewTopComponent/WordTopComponent/WebViewTopComponent/WebViewTopComponent_1/WebViewTopComponent_2/WebViewTopComponent_3/WebViewTopComponent_4/WebViewTopComponent_5/WebViewTopComponent_6/WebViewTopComponent_7/WebViewTopComponent_8/WebViewTopComponent_11/WebViewTopComponent_12/WebViewTopComponent_13/WebViewTopComponent_14/WebViewTopComponent_15"/>
     </fileobject>
-    <fileobject name="leftSlidingSide">
+    <fileobject name="explorer">
         <attr name="WinSys-TCRef-Order" stringvalue="ProjectExploreTopComponent"/>
     </fileobject>
     <fileobject name="output">

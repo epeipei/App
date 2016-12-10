@@ -1,10 +1,10 @@
 /usr/local/netbeans-8.1/platform=1465720400000
-cluster./home/xiao/NetBeansProjects/App/build/cluster=1480910012000
+cluster./home/xiao/NetBeansProjects/App/build/cluster=1481379058000
 cluster./usr/local/netbeans-8.1/ide=1465720400000
 cluster./usr/local/netbeans-8.1/platform=1465720400000
-user=1480910012000
+user=1481379058000
 crc=7
 locale=en_US
 branding=app
-java.version=1.7.0_101
-java.vm.version=24.95-b01
+java.version=1.7.0_80
+java.vm.version=24.80-b11

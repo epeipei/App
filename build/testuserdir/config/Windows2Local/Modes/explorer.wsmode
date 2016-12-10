@@ -11,6 +11,6 @@
   </constraints>
   <bounds x="130" y="163" width="416" height="372" />
   <frame state="0"/>
-    <active-tc  prev-id="ProjectExploreTopComponent" />
+    <active-tc  id="ProjectExploreTopComponent"  prev-id="ProjectExploreTopComponent" />
     <empty-behavior permanent="true"/>
 </mode>

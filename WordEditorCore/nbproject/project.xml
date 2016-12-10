@@ -86,6 +86,10 @@
                 <binary-origin>release/modules/ext/log4j-1.2.16.jar</binary-origin>
             </class-path-extension>
             <class-path-extension>
+                <runtime-relative-path>ext/jfxrt.jar</runtime-relative-path>
+                <binary-origin>release/modules/ext/jfxrt.jar</binary-origin>
+            </class-path-extension>
+            <class-path-extension>
                 <runtime-relative-path>ext/rsyntaxtextarea-2.5.8.jar</runtime-relative-path>
                 <binary-origin>release/modules/ext/rsyntaxtextarea-2.5.8.jar</binary-origin>
             </class-path-extension>

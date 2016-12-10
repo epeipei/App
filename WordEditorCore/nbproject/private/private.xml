@@ -3,11 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/xiao/NetBeansProjects/App/WordEditorCore/src/org/word/editor/toolbar/FontPanel.java</file>
+            <file>file:/home/xiao/NetBeansProjects/App/WordEditorCore/src/org/word/editor/utilty/PathUtility.java</file>
             <file>file:/home/xiao/NetBeansProjects/App/WordEditorCore/src/org/word/editor/toolbar/BuildAction.java</file>
+            <file>file:/home/xiao/NetBeansProjects/App/WordEditorCore/src/org/word/editor/utilty/NormalNode.java</file>
+            <file>file:/home/xiao/NetBeansProjects/App/WordEditorCore/src/org/word/editor/core/Path.java</file>
+            <file>file:/home/xiao/NetBeansProjects/App/WordEditorCore/src/org/word/editor/core/HtmlViewTopComponent.java</file>
+            <file>file:/home/xiao/NetBeansProjects/App/WordEditorCore/src/org/word/editor/core/Statement.java</file>
+            <file>file:/home/xiao/NetBeansProjects/App/WordEditorCore/src/org/word/editor/utilty/SwitchNode.java</file>
+            <file>file:/home/xiao/NetBeansProjects/App/WordEditorCore/src/org/word/editor/core/Branch.java</file>
+            <file>file:/home/xiao/NetBeansProjects/App/WordEditorCore/src/org/word/editor/toolbar/FontPanel.java</file>
             <file>file:/home/xiao/NetBeansProjects/App/WordEditorCore/src/org/word/editor/utilty/LocalExec.java</file>
-            <file>file:/home/xiao/NetBeansProjects/App/WordEditorCore/src/org/word/editor/toolbar/compile_16px_512879_easyicon.net.png</file>
+            <file>file:/home/xiao/NetBeansProjects/App/WordEditorCore/src/org/word/editor/utilty/AbstractNode.java</file>
+            <file>file:/home/xiao/NetBeansProjects/App/WordEditorCore/src/org/word/editor/utilty/BranchNode.java</file>
+            <file>file:/home/xiao/NetBeansProjects/App/WordEditorCore/src/org/word/editor/utilty/HtmlUtility.java</file>
             <file>file:/home/xiao/NetBeansProjects/App/WordEditorCore/src/org/word/editor/toolbar/RunAction.java</file>
+            <file>file:/home/xiao/NetBeansProjects/App/WordEditorCore/src/org/word/editor/toolbar/compile_16px_512879_easyicon.net.png</file>
         </group>
     </open-files>
 </project-private>
