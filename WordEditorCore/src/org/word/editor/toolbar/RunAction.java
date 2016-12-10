@@ -24,6 +24,7 @@ import org.openide.util.Exceptions;
 import org.openide.util.NbBundle.Messages;
 import org.word.editor.core.Contents;
 import org.word.editor.core.HtmlViewTopComponent;
+import org.word.editor.core.WebViewTopComponent;
 import org.word.editor.utilty.CovStruct;
 import org.word.editor.utilty.FileUtility;
 import org.word.editor.utilty.FileUtility.Cond;
@@ -111,9 +112,14 @@ public final class RunAction implements ActionListener {
                     }
                 }
                 
-                HtmlViewTopComponent tp=new HtmlViewTopComponent();
-                tp.setName("Coverage Report For "+file.getName());
-                tp.setText(HtmlUtility.conditionCov(covMap, file.getAbsolutePath()));
+//                HtmlViewTopComponent tp=new HtmlViewTopComponent();
+//                tp.setName("Coverage Report For "+file.getName());
+//                tp.setText(HtmlUtility.conditionCov(covMap, file.getAbsolutePath()));
+//                tp.open();
+//                tp.requestActive();
+                String html=Contents.USER_DIR__STRING+"/condition/"+file.getName()+".html";
+                File covFile=HtmlUtility.conditionCov(covMap, file.getAbsolutePath(), html);
+                WebViewTopComponent tp=new WebViewTopComponent("file:"+covFile.getAbsolutePath());
                 tp.open();
                 tp.requestActive();
             }
@@ -121,17 +127,22 @@ public final class RunAction implements ActionListener {
         else if(Contents.Cov_Flag.equals(Contents.ECMCDC)){//EC-MCDC
             localExec=new LocalExec(Contents.USER_DIR__STRING+"/ecmcdc");
             out=Contents.USER_DIR__STRING+"/condition/output.txt";
-            boolean result=runWithCases(localExec, out);
+            boolean result=runWithCases(localExec, out);//将执行信息写入ｏｕｔ文件了
             if(result){
                //对含有覆盖信息的文件内容按照行排序
-                List<CovStruct> covStruct = FileUtility.getCovStruct(out);
-                //FileUtility.sortList(covStruct);
+                List<CovStruct> covStruct = FileUtility.getCovStruct(out);//处理插桩信息
+                //将执行信息处理成Ｍａｐ结构
                 Map<Integer, Map<Integer, FileUtility.Cond[]>> covMap = FileUtility.convertTo(covStruct);
             
-           
                 //利用生成的list生成覆盖信息报告
-                HtmlViewTopComponent tp=new HtmlViewTopComponent();
-                tp.setText(HtmlUtility.generateHtml(covMap, file.getAbsolutePath()));
+//                HtmlViewTopComponent tp=new HtmlViewTopComponent();
+//                tp.setText(HtmlUtility.generateHtml(covMap, file.getAbsolutePath()));
+//                tp.open();
+//                tp.requestActive();
+
+                String html=Contents.USER_DIR__STRING+"/ecmcdc/"+file.getName()+".html";
+                File covFile=HtmlUtility.generateHtml(covMap, file.getAbsolutePath(), html);
+                WebViewTopComponent tp=new WebViewTopComponent("file:"+covFile.getAbsolutePath());
                 tp.open();
                 tp.requestActive();
             }

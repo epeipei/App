@@ -48,7 +48,7 @@ public final class NewFileAction implements ActionListener {
             logger.info("open file: "+f.getName());
             //设置BuildAction,RunAction的FilePath,问题就是我在写入多个文件的时候
             BuildAction.file=f;
-            BuildAction.update();
+//            BuildAction.update();
             RunAction.file=f;//被测文件
             
 

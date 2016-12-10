@@ -18,7 +18,7 @@ import org.openide.util.NbBundle.Messages;
 import org.word.editor.core.Branch;
 import org.word.editor.core.Condition;
 import org.word.editor.core.Contents;
-import org.word.editor.core.Path;
+import org.word.editor.core.ECMCDC;
 import org.word.editor.core.Statement;
 import org.word.editor.utilty.LocalExec;
 
@@ -37,29 +37,11 @@ import org.word.editor.utilty.LocalExec;
 @Messages("CTL_BuildAction=编译")
 public final class BuildAction implements ActionListener {
     static Logger logger=Logger.getLogger(BuildAction.class);
-    public static File file=null;
-    public static String exeName="";
-    //插桩以后生成的文件
-    public static String pitchName="";
-    
-    
-//    String gccStep1="gcc -c "+fileName+" -ftest-coverage -fprofile-arcs";
-//    String gccStep2="gcc "+objName+" -o "+exeName+" -fprofile-arcs";
-    
-    public static String step1="";//将生成的插桩之后的文件放入到工程的根目录下的condition文件夹下
-    public static String step2="";
     /*
-    在用户改变选择的文件时，file字段改变，同时其他的相关字段也要改变
+    在用户改变选择的文件时，file字段改变，同时其他的相关字段也要改变,在各个build文件中，将file静态引入
     */
-    public static void update(){
-      exeName=file.getName().substring(0,file.getName().indexOf("."))+".exe";
-    //插桩以后生成的文件
-      pitchName=file.getName().substring(0,file.getName().indexOf("."))+".tmp.c";
-      step1=Contents.CONDITION_STRING+" < "+file.getAbsolutePath()+" > "
-            +pitchName;//将生成的插桩之后的文件放入到工程的根目录下的condition文件夹下
-      step2="gcc lex.yy.c "+pitchName+" -o "+exeName+" -lfl ";
-    }
-
+    public static File file=null;
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         logger.info("org.word.editor.toolbar.BuildAction.actionPerformed()");
@@ -83,12 +65,12 @@ public final class BuildAction implements ActionListener {
             LocalExec localExec=new LocalExec(Contents.USER_DIR__STRING+"/condition");
             localExec.exe(condition.getBuildStep1());
             localExec.exe(condition.getBuildStep2());
-        }
-        else if(Contents.Cov_Flag.equals(Contents.ECMCDC)){
+        }else if(Contents.Cov_Flag.equals(Contents.ECMCDC)){
+            ECMCDC ecmcdc=new ECMCDC();
              LocalExec localExec=new LocalExec(Contents.USER_DIR__STRING+"/ecmcdc");
-             localExec.exe(step1); //生成插桩以后的文件
+             localExec.exe(ecmcdc.getBuildStep1()); //生成插桩以后的文件
              //生成可执行文件
-             localExec.exe(step2);//将语法分析文件和插桩后的文件编译生成插桩后的可执行文件
+             localExec.exe(ecmcdc.getBuildStep2());//将语法分析文件和插桩后的文件编译生成插桩后的可执行文件
         }else if(Contents.Cov_Flag.equals(Contents.PATH)){//简单路径覆盖,不会将条件拆分的
 //            Path path=new Path();
 //            LocalExec localExec=new LocalExec(Contents.USER_DIR__STRING+"/path");
@@ -97,8 +79,7 @@ public final class BuildAction implements ActionListener {
               LocalExec localExec=new LocalExec(Contents.USER_DIR__STRING+"/path");
               localExec.exe(statement.getBuildStep1());
               localExec.exe(statement.getBuildStep2());
-        }
-        else {
+        }else {
             
         }
         JOptionPane.showMessageDialog(null, "插桩并且编译完成！");

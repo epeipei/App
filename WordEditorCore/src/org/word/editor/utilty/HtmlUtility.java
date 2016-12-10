@@ -8,6 +8,7 @@ package org.word.editor.utilty;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -25,17 +26,33 @@ public class HtmlUtility {
     private static Logger logger=Logger.getLogger(HtmlUtility.class);
     //根据覆盖信息List<CovStruct>和被测源文件生成html报告----   EC-MC/DC
     //<用特殊字符&lt;来代替，防止在解析的时候出错。
-    public static String generateHtml(Map<Integer,Map<Integer,Cond[]>> covs,String sourcePath){
+    /**
+     * 
+     * @param covs 经过处理之后的插桩信息结构
+     * @param sourcePath　覆盖分析的源文件的路径
+     * @param covPath　着色显示等动作之后　生成的ｈｔｍｌ覆盖分析报告路径
+     * @return 
+     */
+    public static File generateHtml(Map<Integer,Map<Integer,Cond[]>> covs,String sourcePath,String covPath){
         if(covs.size()==0){//未生成覆盖信息
             logger.info("No coverlay analysis file generated!");
         }
-        StringBuilder sb=new StringBuilder("<html><body>");
-        sb.append("<pre name=\"code\" class=\"cpp\">");//该标签会保留定义的缩进信息等
+        File covHtml=new File(covPath);
+//        StringBuilder sb=new StringBuilder("<html><body>");
+//        sb.append("<pre name=\"code\" class=\"cpp\">");//该标签会保留定义的缩进信息等
         BufferedReader br=null;
+        FileWriter fw=null;
         int currentLine=0;
         int listIndex=0;//遍历的List的当前的index
         try {
-            br=new BufferedReader(new FileReader(new File(sourcePath)));
+            fw=new FileWriter(covHtml);
+            String head="<html>\n" +
+                            "<head>\n" +
+            "<link href=\"http://cdn.bootcss.com/highlight.js/8.0/styles/default.min.css\" rel=\"stylesheet\">\n" +
+            "</head>\n" +
+            "<body><pre><code class=\"cpp\">";
+            fw.write(head);//pre标签保留代码的缩进信息等
+            br=new BufferedReader(new FileReader(new File(sourcePath)));//读取源代码信息
             String line="";
             while((line=br.readLine())!=null){
                 currentLine++;
@@ -48,24 +65,31 @@ public class HtmlUtility {
                         if(map.containsKey(i+1)){//第i+1个表达式的值
                             Cond[] condition=map.get(i+1);
                             String relational="";
-                            int index=-1;
-                            if(condition[0].result){
+                            String less="/",eq="/",more="/";//初始化三种关系的达到情况
+                            if(condition[0].result){//小于关系是否达到
                                 relational=condition[0].condition;
-                                index=0;
+                                less="<";
                             }
-                            if(condition[1].result){
+                            if(condition[1].result){//等于关系是否达到
                                 relational=condition[1].condition;
-                                index=1;
+                                eq="=";
                             }
-                            if(condition[2].result){
+                            if(condition[2].result){//大于关系是否达到
                                 relational=condition[2].condition;
-                                index=2;
+                                more=">";
                             }
                             //===三种关系达到的程度 一种8种关系
                             //===end 三种关系
-                            relational=relational.replace("<", "&lt;");
-                            parts[i]=parts[i].replace(condition[index].condition, 
-                            "<strong style=\"background:red\">"+relational+"</strong>");
+                            String originRel=relational;
+                            relational=relational.replace("<", "&lt;");//替换尖括号后的条件表达式
+                            //<a onmouseover="{<,/,>}" style="background:red">    </a>
+                            String result="{"+less+","+eq+","+more+"}\"";//{<,=,>}
+                            StringBuilder tmp=new StringBuilder("<span title=\"");
+                            tmp.append(result).append(" style=\"background:#7CCD7C\">");
+                            tmp.append(relational).append("</span>");
+                            //将parts中的条件表达式　替换成着色并加入动作之后的String
+                            parts[i]=parts[i].replace(originRel, 
+                            tmp.toString());
                         }else{//不含有该条件的覆盖信息，只做替换尖括号的行为
                             parts[i]=parts[i].replaceAll("<", "&lt;");
                         }
@@ -73,23 +97,35 @@ public class HtmlUtility {
                     }//end -for 循环各个条件
                 }else{//不含有该行的覆盖信息
                     line=line.replaceAll("<", "&lt;");
+                    String trim=line.trim();
+                    line=line.replace(trim, "<span>"+trim+"</span>");
+                    //line="<span>"+line+"</span>";
                 }
-                System.out.println(line);
-                sb.append(line+"\n");
-            }
+                //System.out.println(line);
+                //sb.append(line+"\n");
+                fw.write(line+"\n");
+            }//文件读完了
+            String tail="</code>\n" +
+                "</pre>\n" +
+                "<script src=\"http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js\"></script>\n" +
+                "<script >hljs.initHighlightingOnLoad();</script>  \n" +
+                "</body></html>";
+            fw.write(tail);
         } catch (IOException ex) {
             Exceptions.printStackTrace(ex);
         }finally{
             try {
                 br.close();
+                fw.close();
             } catch (IOException ex) {
                 Exceptions.printStackTrace(ex);
             }
         }
         
         //sb.append("if(<strong style=\"background:red\">a>b</strong>)");
-        sb.append("</pre></body></html>");
-        return sb.toString();
+//        sb.append("</pre></body></html>");\
+         
+        return covHtml;
     }
     /*带有分割符的分割字符串，防止在分割之后 丢掉了分割字符  */
     /*正则表达式：句子结束符*/
@@ -228,12 +264,21 @@ public class HtmlUtility {
     /*
     生成条件覆盖的着色文件
     */
-    public static String conditionCov(Map<Integer,Map<Integer,Cond[]>> covs,String source){
-        StringBuilder sb=new StringBuilder("<html><body>");
-        sb.append("<pre name=\"code\" class=\"cpp\">");
+    public static File conditionCov(Map<Integer,Map<Integer,Cond[]>> covs,String source,String cov){
+        File covHtml=new File(cov);
+        FileWriter fw=null;
+//        StringBuilder sb=new StringBuilder("<html><body>");
+//        sb.append("<pre name=\"code\" class=\"cpp\">");
         BufferedReader br=null;
         try {
             int currentLine=0;
+            fw=new FileWriter(covHtml);
+            String head="<html>\n" +
+                        "<head>\n" +
+            "<link href=\"http://cdn.bootcss.com/highlight.js/8.0/styles/default.min.css\" rel=\"stylesheet\">\n" +
+            "</head>\n" +
+            "<body><pre><code class=\"cpp\">";
+            fw.write(head);//pre标签保留代码的缩进信息等
             br=new BufferedReader(new FileReader(new File(source)));
             String line="";
             while((line=br.readLine())!=null){
@@ -256,37 +301,56 @@ public class HtmlUtility {
                                 condition=conds[1].condition;
                             }
                             String color="";
+                            String tip="";
                             if(tbranch&&fbranch){//真/假分支都达到了
-                                color="green";
+                                color="#7CCD7C";
+                                tip="Full Coverage:{T,F}";
                             }else if(tbranch){//
-                                color="yellow";
+                                color="#FFC0CB";
+                                tip="Partial Coverage:{T,/}";
                             }else{
-                                color="blue";
+                                color="#FFC0CB";
+                                tip="Partial Coverage:{/,F}";
                             }
                             String after=condition.replaceAll("<", "&lt;");
                             parts[i]=parts[i].replace(condition, 
-                             "<strong style=\"background:"+color+"\">"+after+"</strong>");
+                             "<span title=\""+tip+"\" style=\"background:"+color+"\">"+after+"</span>");
                         }else{//不含有该条件的覆盖信息
+//                            parts[i]=parts[i].replace(condition, 
+//                             "<span title=\""+tip+"\" style=\"background:"+color+"\">"+after+"</span>");
                             parts[i]=parts[i].replaceAll("<", "&lt;");
                         }
-                        sb.append(parts[i]);
+//                        sb.append(parts[i]);
+                          fw.write(parts[i]);
                     }//end-for 对每一个条件的处理
-                    sb.append("\n");
+                    fw.write("\n");
+//                    sb.append("\n");
                 }else{//不含有该行的覆盖信息
-                    sb.append(line.replaceAll("<", "&lt;")+"\n");
+//                    sb.append(line.replaceAll("<", "&lt;")+"\n");
+                    line=line.replaceAll("<", "&lt;");
+                    String trim=line.trim();
+                    line=line.replace(trim, "<span>"+trim+"</span>");
+                    fw.write(line+"\n");
                 }
-            }
+            }//end -while
+            String tail="</code>\n" +
+                "</pre>\n" +
+                "<script src=\"http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js\"></script>\n" +
+                "<script >hljs.initHighlightingOnLoad();</script>  \n" +
+                "</body></html>";
+            fw.write(tail);
+            
         } catch (Exception e) {
             e.printStackTrace();
         }finally{
             try {
                 br.close();
+                fw.close();
             } catch (IOException ex) {
                 Exceptions.printStackTrace(ex);
             }
         }
-        sb.append("</pre></body></html>");
-        return sb.toString();
+        return covHtml;
     }
 }
 /*
