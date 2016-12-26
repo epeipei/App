@@ -7,7 +7,9 @@ package org.word.editor.toolbar;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import javax.swing.JOptionPane;
 import org.apache.log4j.Logger;
 import org.openide.awt.ActionID;
@@ -16,6 +18,7 @@ import org.openide.awt.ActionReferences;
 import org.openide.awt.ActionRegistration;
 import org.openide.util.NbBundle.Messages;
 import org.word.editor.core.Branch;
+import org.word.editor.core.BranchCondition;
 import org.word.editor.core.Condition;
 import org.word.editor.core.Contents;
 import org.word.editor.core.ECMCDC;
@@ -57,15 +60,35 @@ public final class BuildAction implements ActionListener {
             localExec.exe(statement.getBuildStep2());
         }else if(Contents.Cov_Flag.equals(Contents.BRANCH)){//分支覆盖
             Branch branch=new Branch();
+            String simpleName=file.getName().substring(0,file.getName().indexOf("."));//无后缀的文件名称
             LocalExec localExec=new LocalExec(Contents.USER_DIR__STRING+"/branch");
             localExec.exe(branch.getBuildStep1());
+            /*
+            在if.l中嵌入了main函数，会复制到lex.yy.c中，桩函数也带有main函数，不能通过编译，将main替换成main_1
+            */
             localExec.exe(branch.getBuildStep2());
+            localExec.exe(branch.getBuildStep3());
         }else if(Contents.Cov_Flag.equals(Contents.CONDITION)){
             Condition condition=new Condition();
             LocalExec localExec=new LocalExec(Contents.USER_DIR__STRING+"/condition");
             localExec.exe(condition.getBuildStep1());
+            /*
+            在if.l中嵌入了main函数，会复制到lex.yy.c中，桩函数也带有main函数，不能通过编译，将main替换成main_1
+            */
             localExec.exe(condition.getBuildStep2());
-        }else if(Contents.Cov_Flag.equals(Contents.ECMCDC)){
+            localExec.exe(condition.getBuildStep3());
+        }else if(Contents.Cov_Flag.equals(Contents.BRANCH_CONDITION)){//分支条件覆盖
+            BranchCondition branch_condition=new BranchCondition();
+            LocalExec localExec=new LocalExec(Contents.USER_DIR__STRING+"/branch_condition");
+            localExec.exe(branch_condition.getBuildStep1());
+            localExec.exe(branch_condition.getBuildStep2());
+            localExec.exe(branch_condition.getBuildStep3());
+            localExec.exe(branch_condition.getBuildStep4());
+            localExec.exe(branch_condition.getBuildStep5());
+            localExec.exe(branch_condition.getBuildStep6());
+            
+        }
+        else if(Contents.Cov_Flag.equals(Contents.ECMCDC)){
             ECMCDC ecmcdc=new ECMCDC();
              LocalExec localExec=new LocalExec(Contents.USER_DIR__STRING+"/ecmcdc");
              localExec.exe(ecmcdc.getBuildStep1()); //生成插桩以后的文件
@@ -84,4 +107,6 @@ public final class BuildAction implements ActionListener {
         }
         JOptionPane.showMessageDialog(null, "插桩并且编译完成！");
     }
+
+    
 }

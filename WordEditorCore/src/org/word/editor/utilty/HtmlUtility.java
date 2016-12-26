@@ -10,12 +10,17 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.apache.log4j.Logger;
 import org.openide.util.Exceptions;
 import org.word.editor.core.Contents;
+import org.word.editor.core.Template;
 import org.word.editor.utilty.FileUtility.Cond;
 
 /**
@@ -207,17 +212,26 @@ public class HtmlUtility {
     /*
     生成分支覆盖分析的着色文件
     */
-    public static String branchCov(Map<Integer,Cond[]> maps,String source){
+    public static String branchCov(Map<Integer,Cond[]> maps,String source,Template template){
         File file=new File(source);
-        StringBuilder sb=new StringBuilder("<html></body>");
-        sb.append("<pre name=\"code\" class=\"cpp\">");
+        StringBuilder sb=new StringBuilder("<table cellpadding=0 cellspacing=0 border=0>\n" +
+"    <tr>\n" +
+"      <td><br></td>\n" +
+"    </tr>\n" +
+"    <tr>\n" +
+"      <td>");
+        sb.append("<pre class=\"sourceHeading\">          Line data    Source code</pre>\n" +
+"<pre class=\"source\">\n<code>\n<a name=\"1\">");
         BufferedReader br=null;
+        int hit=0;
+        int part=0;
         try {
             br=new BufferedReader(new FileReader(file));
             String line="";
             int currentLine=0;
             while((line=br.readLine())!=null){
                 currentLine++;
+                sb.append("<span class=\"lineNum\">       "+currentLine+" </span>  :  ");//行号
                 if(maps.containsKey(currentLine)){//该行有覆盖信息
                     Cond[] conds=maps.get(currentLine);
                     String branch="";
@@ -232,21 +246,32 @@ public class HtmlUtility {
                         trueBranch=true;
                     }
                     String color="";
+                    String tip="";
                     if(trueBranch&&falseBranch){//真假分支都达到了,着色为绿色
-                        color="green";
+                        //color="<span class=\"lineCov\""
+                        color="#7CCD7C";
+                        tip="{T,F}";
+                        hit++;
                     }else if(trueBranch){//只有真分支达到了,着色为黄色
-                        color="yellow";
+                        color="#FFC0CB";
+                        tip="{T,/}";
+                        part++;
                     }else{//只有假分支达到了，着色为蓝色
-                        color="blue";
+                        color="#FFC0CB";
+                        tip="{/,F}";
+                        part++;
                     }
                     int index=line.indexOf(branch);
                     String pre=line.substring(0,index);
                     String post=line.substring(index+branch.length(),line.length());
                     branch=branch.replaceAll("<", "&lt;");
                     //sb.append(pre).append("<strong style=\"background:").append(color).append(sb)
-                    sb.append(pre+"<strong style=\"background:"+color+"\">"+branch+"</strong>"+post+"\n");
+                    sb.append(pre+"<span title=\""+tip+"\" style=\"background:"+color+"\">"+branch+"</span>"+post+"\n");
                 }else{
-                    sb.append(line.replaceAll("<", "&lt;")+"\n");
+                    line=line.replaceAll("<", "&lt;");
+                    String trim=line.trim();
+                    line=line.replace(trim, "<span>"+trim+"</span>\n");
+                    sb.append(line);
                 }
             }
         } catch (Exception e) {
@@ -258,31 +283,37 @@ public class HtmlUtility {
                 Exceptions.printStackTrace(ex);
             }
         }
-        sb.append("</pre></body></html>");
+        sb.append("</code>\n</pre>\n" +
+"      </td>\n" +
+"    </tr>\n" +
+"  </table>\n" +
+"  <br>\n");
+        template.setHit(hit);
+        template.setPart(part);
         return sb.toString();
     }
     /*
     生成条件覆盖的着色文件
     */
-    public static File conditionCov(Map<Integer,Map<Integer,Cond[]>> covs,String source,String cov){
-        File covHtml=new File(cov);
-        FileWriter fw=null;
-//        StringBuilder sb=new StringBuilder("<html><body>");
-//        sb.append("<pre name=\"code\" class=\"cpp\">");
+    public static String conditionCov(Map<Integer,Map<Integer,Cond[]>> covs,String source,Template template){
+        StringBuilder sb=new StringBuilder("<table cellpadding=0 cellspacing=0 border=0>\n" +
+"    <tr>\n" +
+"      <td><br></td>\n" +
+"    </tr>\n" +
+"    <tr>\n" +
+"      <td>");
+        sb.append("<pre class=\"sourceHeading\">          Line data    Source code</pre>\n" +
+"<pre class=\"source\">\n<code>\n<a name=\"1\">");
         BufferedReader br=null;
+        int hit=0;
+        int part=0;
         try {
             int currentLine=0;
-            fw=new FileWriter(covHtml);
-            String head="<html>\n" +
-                        "<head>\n" +
-            "<link href=\"http://cdn.bootcss.com/highlight.js/8.0/styles/default.min.css\" rel=\"stylesheet\">\n" +
-            "</head>\n" +
-            "<body><pre><code class=\"cpp\">";
-            fw.write(head);//pre标签保留代码的缩进信息等
             br=new BufferedReader(new FileReader(new File(source)));
             String line="";
             while((line=br.readLine())!=null){
                 currentLine++;
+                sb.append("<span class=\"lineNum\">       "+currentLine+" </span>  :  ");//行号
                 String[] parts=split(line, "&&|\\|\\|");
                 if(covs.containsKey(currentLine)){//含有该行的覆盖信息
                     Map<Integer,Cond[]> map=covs.get(currentLine);
@@ -305,12 +336,15 @@ public class HtmlUtility {
                             if(tbranch&&fbranch){//真/假分支都达到了
                                 color="#7CCD7C";
                                 tip="Full Coverage:{T,F}";
+                                hit++;
                             }else if(tbranch){//
                                 color="#FFC0CB";
                                 tip="Partial Coverage:{T,/}";
+                                part++;
                             }else{
                                 color="#FFC0CB";
                                 tip="Partial Coverage:{/,F}";
+                                part++;
                             }
                             String after=condition.replaceAll("<", "&lt;");
                             parts[i]=parts[i].replace(condition, 
@@ -320,38 +354,173 @@ public class HtmlUtility {
 //                             "<span title=\""+tip+"\" style=\"background:"+color+"\">"+after+"</span>");
                             parts[i]=parts[i].replaceAll("<", "&lt;");
                         }
-//                        sb.append(parts[i]);
-                          fw.write(parts[i]);
+                        sb.append(parts[i]);
                     }//end-for 对每一个条件的处理
-                    fw.write("\n");
-//                    sb.append("\n");
+                    sb.append("\n");
                 }else{//不含有该行的覆盖信息
 //                    sb.append(line.replaceAll("<", "&lt;")+"\n");
                     line=line.replaceAll("<", "&lt;");
                     String trim=line.trim();
                     line=line.replace(trim, "<span>"+trim+"</span>");
-                    fw.write(line+"\n");
+                    sb.append(line+"\n");
                 }
             }//end -while
-            String tail="</code>\n" +
-                "</pre>\n" +
-                "<script src=\"http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js\"></script>\n" +
-                "<script >hljs.initHighlightingOnLoad();</script>  \n" +
-                "</body></html>";
-            fw.write(tail);
-            
         } catch (Exception e) {
             e.printStackTrace();
         }finally{
             try {
                 br.close();
-                fw.close();
             } catch (IOException ex) {
                 Exceptions.printStackTrace(ex);
             }
         }
-        return covHtml;
+        sb.append("</code>\n</pre>\n" +
+"      </td>\n" +
+"    </tr>\n" +
+"  </table>\n" +
+"  <br>\n");
+        template.setHit(hit);
+        template.setPart(part);
+        return sb.toString();
     }
+    
+    public static String branchCondCov(Map<Integer,Map<Integer,List<CovStruct>>> branchsMap,
+            Map<Integer,Map<Integer,List<CovStruct>>> condsMap,String source,Template template){
+        //-----获得每个条件覆盖了多少
+        //存放每一个条件的结果,key表示该分支中的第几个表达式
+        Map<Integer, Map<Integer, Cond[]>> condsResultMap = FileUtility.convertToCondition(FileUtility.getCovStruct(Contents.USER_DIR__STRING+"/branch_condition/out_cond.txt"));
+        //--------
+        
+        StringBuilder sb=new StringBuilder("<table cellpadding=0 cellspacing=0 border=0>\n" +
+"    <tr>\n" +
+"      <td><br></td>\n" +
+"    </tr>\n" +
+"    <tr>\n" +
+"      <td>");
+        sb.append("<pre class=\"sourceHeading\">          Line data    Source code</pre>\n" +
+"<pre class=\"source\">\n<code>\n<a name=\"1\">");
+        
+        BufferedReader br=null;
+        int hit=0;
+        int part=0;
+        int currentLine=0;
+        try {
+            br=new BufferedReader(new FileReader(new File(source)));//读取被测源文件
+            String line="";
+            while((line=br.readLine())!=null){
+                currentLine++;
+                sb.append("<span class=\"lineNum\">       "+currentLine+" </span>  :  ");//行号
+                if(branchsMap.containsKey(currentLine)&&condsMap.containsKey(currentLine)){//均存在该行的覆盖信息
+                    String[] parts=split(line, "&&|\\|\\|");
+                    Map<Integer,List<CovStruct>> branchResult=branchsMap.get(currentLine);
+                    Map<Integer,List<CovStruct>> condsResult=condsMap.get(currentLine);
+                    Set<String> sets=new HashSet<String>();//去重用例结果
+                    Set<Integer> bResult=new HashSet<>();
+                    for(Integer key:branchResult.keySet()){//一个用例一个用例的进行迭代
+                        List<CovStruct> result1=branchResult.get(key);
+                        List<CovStruct> result2=condsResult.get(key);//
+                        StringBuilder sbResult=new StringBuilder("[");//组合条件的结果用大括号括起来
+                        for(int i=1;i<=parts.length;i++){//对分支中的每一个条件判断
+                            boolean flag=false;//是否找到该条件的标志
+                            for(CovStruct struct:result2){//遍历结果列表
+                                if(struct.cs==i){//找到了序号相同的条件
+                                    flag=true;
+                                    if(struct.result==0) sbResult.append("F");
+                                    else sbResult.append("T");
+                                    break;
+                                }
+                            }//end-struct-for
+                            if(!flag){//未找到
+                               sbResult.append("/");
+                            }
+                            if(i==parts.length){
+                                sbResult.append("="+result1.get(0).result+"]");
+                                bResult.add(result1.get(0).result);
+                            }
+                            else sbResult.append(",");
+                        }//条件判断结束
+                        //一个用例的执行处理结束
+                        sets.add(sbResult.toString());
+                    }//end-对所有的用例的执行结果处理结束
+                    //对分支覆盖 中的hit part记录
+                    if(bResult.size()==2) hit++;
+                    else part++;
+                    StringBuilder title=new StringBuilder();
+                    int k=0;
+                    for(String s:sets){
+                        k++;
+                        title.append(s);
+                        if(k!=sets.size()) title.append(",");
+                    }
+                    //对每个条件进行着色 并且显示帮助tip信息
+                    Map<Integer, Cond[]> map = condsResultMap.get(currentLine);
+                    for(int i=0;i<parts.length;i++){//对每一个条件的处理
+                        if(map.containsKey(i+1)){//含有该条件的覆盖信息
+                            Cond[] conds=map.get(i+1);
+                            boolean tbranch=false;
+                            boolean fbranch=false;
+                            String condition="";
+                            if(conds[0].result){//收集达到真假分支的情况
+                                tbranch=true;
+                                condition=conds[0].condition;
+                            }
+                            if(conds[1].result){
+                                fbranch=true;
+                                condition=conds[1].condition;
+                            }
+                            String color="";
+                            String tip="";
+                            if(tbranch&&fbranch){//真/假分支都达到了
+                                color="#7CCD7C";
+                                tip="Full Coverage: ";
+                                hit++;
+                            }else if(tbranch){//
+                                color="#FFC0CB";
+                                tip="Partial Coverage: ";
+                                part++;
+                            }else{
+                                color="#FFC0CB";
+                                tip="Partial Coverage: ";
+                                part++;
+                            }
+                            String after=condition.replaceAll("<", "&lt;");
+                            parts[i]=parts[i].replace(condition, 
+                             "<span title=\""+tip+title+"\" style=\"background:"+color+"\">"+after+"</span>");
+                        }else{//不含有该条件的覆盖信息
+//                            parts[i]=parts[i].replace(condition, 
+//                             "<span title=\""+tip+"\" style=\"background:"+color+"\">"+after+"</span>");
+                            parts[i]=parts[i].replaceAll("<", "&lt;");
+                        }
+                        sb.append(parts[i]);
+                    }//end-for 对每一个条件的处理
+                    sb.append("\n");//该行处理结束，
+                    //------------------------
+                }else{//没有该行的覆盖信息
+                    line=line.replaceAll("<", "&lt;");
+                    String trim=line.trim();
+                    line=line.replace(trim, "<span>"+trim+"</span>");
+                    sb.append(line+"\n");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            try {
+                br.close();
+            } catch (IOException ex) {
+                Exceptions.printStackTrace(ex);
+            }
+        }
+        sb.append("</code>\n</pre>\n" +
+"      </td>\n" +
+"    </tr>\n" +
+"  </table>\n" +
+"  <br>\n");
+        template.setHit(hit);
+        template.setPart(part);
+        return sb.toString();
+    }//end-branchCondCov
+    
 }
 /*
 <html>

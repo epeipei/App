@@ -1,0 +1,37 @@
+<html>
+<head>
+<link href="http://cdn.bootcss.com/highlight.js/8.0/styles/default.min.css" rel="stylesheet">
+</head>
+    <body>
+       <pre>        <span style="color: #0000ff;background:red" title="static">static</span> <span style="color: #0000ff;">void</span> bubble_sort(<span style="color: #0000ff;">int</span><span style="color: #000000;">[] unsorted)
+        {
+            </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; unsorted.Length; i++<span style="color: #000000;">)
+            {
+                </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = i; j &lt; unsorted.Length; j++<span style="color: #000000;">)
+                {
+                    </span><span style="color: #0000ff;">if</span> (unsorted[i] &gt;<span style="color: #000000;"> unsorted[j])
+                    {
+                        </span><span style="color: #0000ff;">int</span> temp =<span style="color: #000000;"> unsorted[i];
+                        unsorted[i] </span>=<span style="color: #000000;"> unsorted[j];
+                        unsorted[j] </span>=<span style="color: #000000;"> temp;
+                    }
+                }
+            }
+        }
+
+        </span><span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span> Main(<span style="color: #0000ff;">string</span><span style="color: #000000;">[] args)
+        {
+            </span><span style="color: #0000ff;">int</span>[] x = { <span style="color: #800080;">6</span>, <span style="color: #800080;">2</span>, <span style="color: #800080;">4</span>, <span style="color: #800080;">1</span>, <span style="color: #800080;">5</span>, <span style="color: #800080;">9</span><span style="color: #000000;"> };
+            bubble_sort(x);
+            </span><span style="color: #0000ff;">foreach</span> (<span style="color: #0000ff;">var</span> item <span style="color: #0000ff;">in</span><span style="color: #000000;"> x)
+            {
+                Console.WriteLine(item);
+            }
+            Console.ReadLine();
+        }</span></pre>
+
+<span title="第一行&#13;&#10;第二行">把鼠标放上去看看</span>
+<script src="http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>
+<script >hljs.initHighlightingOnLoad();</script>
+    </body>
+</html>

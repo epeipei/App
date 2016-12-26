@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title></title>
+  <link rel="stylesheet" type="text/css" href="./css/gcov.css">
+  <link href="http://cdn.bootcss.com/highlight.js/8.0/styles/default.min.css" rel="stylesheet">
+</head>
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">Condition Coverage Report</td></tr>
+    <tr><td class="ruler"><img src="./css/glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue">/home/xiao/Test/lex/condition/triangle.c</td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">Condition Info</td>
+            <td></td>
+            <td class="headerItem">Condition Info</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntry">8</td>
+            <td class="headerCovTableEntryMed">50.00%</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2016-12-20</td>
+            <td></td>
+            <td class="headerItem">Partial:</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntry">8</td>
+            <td class="headerCovTableEntryHi">50.00%</td>
+          </tr>
+          <tr><td><img src="./css/glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="./css/glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+<table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td><pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<code>
+<a name="1"><span class="lineNum">       1 </span>  :  <span>#include&lt;stdio.h></span>
+<span class="lineNum">       2 </span>  :  <span>#include&lt;stdbool.h></span>
+<span class="lineNum">       3 </span>  :  <span>bool judge(int a,int b,int c){</span>
+<span class="lineNum">       4 </span>  :  	if(<span title="Full Coverage:{T,F}" style="background:#7CCD7C">a+b>c</span>&&<span title="Full Coverage:{T,F}" style="background:#7CCD7C">b+c>a</span>&&<span title="Partial Coverage:{/,F}" style="background:#FFC0CB">a+c>b</span>){
+<span class="lineNum">       5 </span>  :  		if(<span title="Full Coverage:{T,F}" style="background:#7CCD7C">a==b</span>){
+<span class="lineNum">       6 </span>  :  			if(<span title="Full Coverage:{T,F}" style="background:#7CCD7C">b==c</span>){
+<span class="lineNum">       7 </span>  :  				<span>printf("等边三角形\n");</span>
+<span class="lineNum">       8 </span>  :  			<span>}else{</span>
+<span class="lineNum">       9 </span>  :  				<span>printf("等腰三角形\n");</span>
+<span class="lineNum">       10 </span>  :  			<span>}</span>
+<span class="lineNum">       11 </span>  :  		<span>}else{</span>
+<span class="lineNum">       12 </span>  :  			if(<span title="Partial Coverage:{T,/}" style="background:#FFC0CB">b==c</span>){
+<span class="lineNum">       13 </span>  :  				<span>printf("等腰三角形\n");</span>
+<span class="lineNum">       14 </span>  :  			<span>}else{</span>
+<span class="lineNum">       15 </span>  :  				if(<span title="Partial Coverage:{T,/}" style="background:#FFC0CB">c==a</span>){
+<span class="lineNum">       16 </span>  :  					<span>printf("等腰三角形\n");</span>
+<span class="lineNum">       17 </span>  :  				<span>}else{</span>
+<span class="lineNum">       18 </span>  :  					<span>printf("不等边三角形\n");</span>
+<span class="lineNum">       19 </span>  :  				<span>}</span>
+<span class="lineNum">       20 </span>  :  			<span>}</span>
+<span class="lineNum">       21 </span>  :  		<span>}</span>
+<span class="lineNum">       22 </span>  :  	<span>}else{</span>
+<span class="lineNum">       23 </span>  :  		<span>printf("不构成三角形\n");</span>
+<span class="lineNum">       24 </span>  :  	<span>}</span>
+<span class="lineNum">       25 </span>  :  	<span>return 0;</span>
+<span class="lineNum">       26 </span>  :  <span>}</span>
+<span class="lineNum">       27 </span>  :  <span>int main(int argc,char *argv[]){</span>
+<span class="lineNum">       28 </span>  :  	if(<span title="Partial Coverage:{T,/}" style="background:#FFC0CB">argc&lt;4</span>){
+<span class="lineNum">       29 </span>  :  		<span>printf("需要三个参数\n");</span>
+<span class="lineNum">       30 </span>  :  		<span>return 0;</span>
+<span class="lineNum">       31 </span>  :  	<span>}</span>
+<span class="lineNum">       32 </span>  :  	<span>int a=atoi(argv[1]);</span>
+<span class="lineNum">       33 </span>  :  	<span>int b=atoi(argv[2]);</span>
+<span class="lineNum">       34 </span>  :  	<span>int c=atoi(argv[3]);</span>
+<span class="lineNum">       35 </span>  :  	<span>printf("%d",judge(a,b,c));</span>
+<span class="lineNum">       36 </span>  :  	<span>return 0;</span>
+<span class="lineNum">       37 </span>  :  <span>}</span>
+</code>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+<table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="./css/glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+  <br>
+
+<script src="http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>
+<script >hljs.initHighlightingOnLoad();</script>  
+</body>
+</html>

@@ -152,7 +152,7 @@ typedef unsigned int flex_uint32_t;
 #endif /* __ia64__ */
 #endif
 
-/* The state buf must be large enough to hold one state per character in the main buffer.
+/* The state buf must be large enough to hold one state per character in the main_1_1_1_1_1 buffer.
  */
 #define YY_STATE_BUF_SIZE   ((YY_BUF_SIZE + 2) * sizeof(yy_state_type))
 
@@ -488,6 +488,7 @@ char *yytext;
 #include<string.h>
 #include<stdbool.h>
 int line=1;
+int total=0;
 int cs=0;//表示每一行的条件的个数，计数
 bool comment_flag=false;//for /* comment
 void func(char *a,char *b){
@@ -531,7 +532,7 @@ bool cond(int line,int cs,bool b,char *condition){
 		return b;
 }
 
-#line 535 "lex.yy.c"
+#line 536 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -710,7 +711,7 @@ extern int yylex (void);
 #define YY_RULE_SETUP \
 	YY_USER_ACTION
 
-/** The main scanner function which does all the work.
+/** The main_1_1_1_1_1 scanner function which does all the work.
  */
 YY_DECL
 {
@@ -718,9 +719,9 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 63 "if.l"
+#line 64 "if.l"
 
-#line 724 "lex.yy.c"
+#line 725 "lex.yy.c"
 
 	if ( !(yy_init) )
 		{
@@ -806,7 +807,7 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 /* rule 1 can match eol */
 YY_RULE_SETUP
-#line 64 "if.l"
+#line 65 "if.l"
 {
 	line++;
 	cs=0;
@@ -815,28 +816,28 @@ YY_RULE_SETUP
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 69 "if.l"
+#line 70 "if.l"
 {
 	printf("%s",yytext);
 	}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 72 "if.l"
+#line 73 "if.l"
 {
 	printf("%s",yytext);
 	}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 75 "if.l"
+#line 76 "if.l"
 {//for comment // line
 	printf("%s",yytext);
 	}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 78 "if.l"
+#line 79 "if.l"
 {
 		comment_flag=true;
 		printf("%s",yytext);
@@ -844,7 +845,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 82 "if.l"
+#line 83 "if.l"
 {
 		comment_flag=false;
 		printf("%s",yytext);
@@ -852,7 +853,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 86 "if.l"
+#line 87 "if.l"
 {
 		if(!comment_flag){//not the comment
 		//	int len=strlen(yytext)+1;
@@ -863,6 +864,7 @@ YY_RULE_SETUP
 		//	char *l=strtok(rcc,op);
 		//	char *r=strtok(NULL,op);
 			cs++;
+			total++;
 		//	printf("((%s)?cond_1(%d,%d,\"%s\"):cond_0(%d,%d,\"%s\"))",
 	//		printf("(cond(%d,%d,%s,%s,\"%s\"),%s)",line,cs,l,r,yytext,yytext);
 			printf("(cond(%d,%d,%s,\"%s\"))",line,cs,yytext,yytext);
@@ -873,10 +875,10 @@ YY_RULE_SETUP
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 103 "if.l"
+#line 105 "if.l"
 ECHO;
 	YY_BREAK
-#line 880 "lex.yy.c"
+#line 882 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1789,7 +1791,7 @@ static int yy_init_globals (void)
     (yy_init) = 0;
     (yy_start) = 0;
 
-/* Defined in main.c */
+/* Defined in main_1_1_1_1_1.c */
 #ifdef YY_STDINIT
     yyin = stdin;
     yyout = stdout;
@@ -1874,8 +1876,12 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 103 "if.l"
+#line 105 "if.l"
 
 
-
+int main_1_1_1_1_1(){
+	yylex();
+	printf("//%d\n",total);
+	return 0;
+}
 

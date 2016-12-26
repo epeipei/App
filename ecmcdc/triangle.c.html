@@ -1,0 +1,46 @@
+<html>
+<head>
+<link href="http://cdn.bootcss.com/highlight.js/8.0/styles/default.min.css" rel="stylesheet">
+</head>
+<body><pre><code class="cpp"><span>#include&lt;stdio.h></span>
+<span>#include&lt;stdbool.h></span>
+<span>bool judge(int a,int b,int c){</span>
+	if(<span title="{<,/,>}" style="background:#7CCD7C">a+b>c</span>&&<span title="{<,/,>}" style="background:#7CCD7C">b+c>a</span>&&<span title="{/,/,>}" style="background:#7CCD7C">a+c>b</span>){
+		if(<span title="{<,=,>}" style="background:#7CCD7C">a==b</span>){
+			if(<span title="{<,=,/}" style="background:#7CCD7C">b==c</span>){
+				<span>printf("等边三角形\n");</span>
+			<span>}else{</span>
+				<span>printf("等腰三角形\n");</span>
+			<span>}</span>
+		<span>}else{</span>
+			if(<span title="{<,/,>}" style="background:#7CCD7C">b==c</span>){
+				<span>printf("等腰三角形\n");</span>
+			<span>}else{</span>
+				if(<span title="{<,/,>}" style="background:#7CCD7C">c==a</span>){
+					<span>printf("等腰三角形\n");</span>
+				<span>}else{</span>
+					<span>printf("不等边三角形\n");</span>
+				<span>}</span>
+			<span>}</span>
+		<span>}</span>
+	<span>}else{</span>
+		<span>printf("不构成三角形\n");</span>
+	<span>}</span>
+	<span>return 0;</span>
+<span>}</span>
+<span>int main(int argc,char *argv[]){</span>
+	if(<span title="{/,=,/}" style="background:#7CCD7C">argc&lt;4</span>){
+		<span>printf("需要三个参数\n");</span>
+		<span>return 0;</span>
+	<span>}</span>
+	<span>int a=atoi(argv[1]);</span>
+	<span>int b=atoi(argv[2]);</span>
+	<span>int c=atoi(argv[3]);</span>
+	<span>printf("%d",judge(a,b,c));</span>
+	<span>return 0;</span>
+<span>}</span>
+</code>
+</pre>
+<script src="http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>
+<script >hljs.initHighlightingOnLoad();</script>  
+</body></html>

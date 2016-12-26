@@ -171,6 +171,7 @@ public class FileUtility {
     }
     /*
     转化成条件覆盖的信息，并且去掉重复的信息，对于每一个条件只保留结果为真或者假的情况
+    Map<Integer,Map<Integer,Cond[]>> key 是行号，第二个key是每一行的第几个条件
     */
     public static Map<Integer,Map<Integer,Cond[]>> convertToCondition(List<CovStruct> lists){
         Map<Integer,Map<Integer,Cond[]>> result=new HashMap<>();

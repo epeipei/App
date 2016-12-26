@@ -3,6 +3,7 @@
 #include<string.h>
 #include<stdbool.h>
 int line=1;
+int total=0;//计数所有的分支数
 bool comment_flag=false;// for /* comment
 void func(char *a,char *b){
 	printf("if(%s>%s){printf(\"1\");}\n",a,b);
@@ -56,6 +57,7 @@ SPACE	[ \t\n]*
 	}
 if\(.*\)	{
 		if(!comment_flag){
+			total++;
 			int len=strlen(yytext);
 			char *exp=(char*)malloc(len*sizeof(char));
 			memcpy(exp,yytext+3,len-4);
@@ -65,4 +67,8 @@ if\(.*\)	{
 		}
 	}
 %%
-
+int main(){	
+	yylex();
+	printf("//%d\n",total);
+	return 0;
+}
