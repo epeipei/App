@@ -1,5 +1,5 @@
 -------------------------------------------------------------------------------
->Log Session: Tuesday, December 20, 2016 10:18:54 PM CST
+>Log Session: Sunday, January 8, 2017 10:26:17 AM CST
 >System Info: 
   Product Version         = App 201510222201
   Operating System        = Linux version 4.2.0-42-generic running on amd64
@@ -57,7 +57,7 @@ INFO [org.netbeans.core.startup.NbEvents]: Turning on modules:
 	org.netbeans.modules.options.api/1 [1.44.1 201510222201]
 	org.netbeans.modules.settings/1 [1.48.1 201510222201]
 	org.netbeans.core.windows/2 [2.80.1 201510222201]
-	org.word.editor.core [1.0 161220]
+	org.word.editor.core [1.0 170108]
 	org.openide.filesystems.compat8 [9.7.1 201510222201]
 	org.netbeans.modules.progress.ui [1.32.1 201510222201]
 	org.netbeans.modules.print [7.25.1 201510222201]
@@ -86,6 +86,7 @@ INFO [org.netbeans.core.network.proxy.NetworkProxyReloader]: System network prox
 INFO [org.netbeans.core.network.proxy.NetworkProxyReloader]: System network proxy - mode: direct
 INFO [org.netbeans.core.network.proxy.NetworkProxyReloader]: System network proxy: fell to default (correct if direct mode went before)
 WARNING [org.openide.filesystems.Ordering]: Not all children in Toolbars/ marked with the position attribute: [Build], but some are: [File, Clipboard, UndoRedo, Memory, Standard.xml]
+WARNING [org.openide.awt.Toolbar]: Too long AWTTask: 3,200 ms for org.openide.awt.Toolbar$Folder@42623a9d(FolderList{MultiFileObject@4bb526fb[Toolbars/File]})
 INFO [org.netbeans.ui.metrics.laf]: USG_LOOK_AND_FEEL
 Diagnostic information
 Input arguments:
@@ -100,10 +101,161 @@ Input arguments:
 Compiler: HotSpot 64-Bit Tiered Compilers
 Heap memory usage: initial 60.5MB maximum 860.5MB
 Non heap memory usage: initial 23.4MB maximum 130.0MB
-Garbage collector: PS Scavenge (Collections=5 Total time spent=0s)
+Garbage collector: PS Scavenge (Collections=9 Total time spent=0s)
 Garbage collector: PS MarkSweep (Collections=0 Total time spent=0s)
-Classes: loaded=4543 total loaded=4543 unloaded 0
+Classes: loaded=4778 total loaded=4778 unloaded 0
 INFO [org.netbeans.core.ui.warmup.DiagnosticTask]: Total memory 4,059,250,688
 INFO [null]: Total physical memory 4,059,250,688
 WARNING [org.openide.filesystems.Ordering]: Not all children in Menu/Window/ marked with the position attribute: [org-word-editor-explore-ProjectExploreTopComponent.shadow], but some are: [org-netbeans-core-io-ui-IOWindowAction.shadow, SwitchToRecentDocumentAction.shadow, Web, Tools, Separator3.instance, ConfigureWindow, org-netbeans-core-windows-actions-ResetWindowsAction.shadow, Separator4.instance, CloseWindowAction.shadow, CloseAllDocumentsAction.shadow, CloseAllButThisAction.shadow, GroupsMenuAction.shadow, DocumentsAction.shadow]
-WARNING [org.netbeans.core.TimableEventQueue]: too much time in AWT thread null
+WARNING [org.netbeans.core.windows.WindowManagerImpl]
+java.lang.IllegalStateException: Problem in some module which uses Window System: Window System API is required to be called from AWT thread only, see http://core.netbeans.org/proposals/threading/
+	at org.netbeans.core.windows.WindowManagerImpl.warnIfNotInEDT(WindowManagerImpl.java:1764)
+	at org.netbeans.core.windows.WindowManagerImpl.topComponentDisplayNameChanged(WindowManagerImpl.java:1353)
+	at org.openide.windows.TopComponent.setName(TopComponent.java:978)
+	at org.word.editor.core.WebViewTopComponent.<init>(WebViewTopComponent.java:43)
+	at org.word.editor.core.WebViewTopComponent.<init>(WebViewTopComponent.java:51)
+	at org.word.editor.toolbar.RunAction$1.run(RunAction.java:202)
+	at java.lang.Thread.run(Thread.java:745)
+WARNING [org.netbeans.core.windows.WindowManagerImpl]
+java.lang.IllegalStateException: Problem in some module which uses Window System: Window System API is required to be called from AWT thread only, see http://core.netbeans.org/proposals/threading/
+	at org.netbeans.core.windows.WindowManagerImpl.warnIfNotInEDT(WindowManagerImpl.java:1764)
+	at org.netbeans.core.windows.WindowManagerImpl.topComponentToolTipChanged(WindowManagerImpl.java:1369)
+	at org.openide.windows.TopComponent.setToolTipText(TopComponent.java:1068)
+	at org.word.editor.core.WebViewTopComponent.<init>(WebViewTopComponent.java:44)
+	at org.word.editor.core.WebViewTopComponent.<init>(WebViewTopComponent.java:51)
+	at org.word.editor.toolbar.RunAction$1.run(RunAction.java:202)
+	at java.lang.Thread.run(Thread.java:745)
+WARNING [org.netbeans.core.windows.WindowManagerImpl]
+java.lang.IllegalStateException: Problem in some module which uses Window System: Window System API is required to be called from AWT thread only, see http://core.netbeans.org/proposals/threading/
+	at org.netbeans.core.windows.WindowManagerImpl.warnIfNotInEDT(WindowManagerImpl.java:1764)
+	at org.netbeans.core.windows.WindowManagerImpl.topComponentOpenAtTabPosition(WindowManagerImpl.java:1231)
+	at org.netbeans.core.windows.WindowManagerImpl.topComponentOpen(WindowManagerImpl.java:1226)
+	at org.openide.windows.TopComponent.open(TopComponent.java:497)
+	at org.openide.windows.TopComponent.open(TopComponent.java:477)
+	at org.word.editor.toolbar.RunAction$1.run(RunAction.java:203)
+	at java.lang.Thread.run(Thread.java:745)
+WARNING [org.netbeans.core.windows.WindowManagerImpl]
+java.lang.IllegalStateException: Problem in some module which uses Window System: Window System API is required to be called from AWT thread only, see http://core.netbeans.org/proposals/threading/
+	at org.netbeans.core.windows.WindowManagerImpl.warnIfNotInEDT(WindowManagerImpl.java:1764)
+	at org.netbeans.core.windows.WindowManagerImpl.topComponentID(WindowManagerImpl.java:1410)
+	at org.openide.windows.WindowManager.findTopComponentID(WindowManager.java:551)
+	at org.netbeans.core.windows.model.TopComponentSubModel.getID(TopComponentSubModel.java:382)
+	at org.netbeans.core.windows.model.TopComponentSubModel.containsTopComponent(TopComponentSubModel.java:278)
+	at org.netbeans.core.windows.model.DefaultModeModel.containsTopComponent(DefaultModeModel.java:348)
+	at org.netbeans.core.windows.model.DefaultModel.containsModeTopComponent(DefaultModel.java:911)
+	at org.netbeans.core.windows.Central.containsModeTopComponent(Central.java:1563)
+	at org.netbeans.core.windows.ModeImpl.containsTopComponent(ModeImpl.java:431)
+	at org.netbeans.core.windows.WindowManagerImpl.findMode(WindowManagerImpl.java:584)
+	at org.netbeans.core.windows.WindowManagerImpl.getMode(WindowManagerImpl.java:1597)
+	at org.netbeans.core.windows.WindowManagerImpl.topComponentOpenAtTabPosition(WindowManagerImpl.java:1238)
+	at org.netbeans.core.windows.WindowManagerImpl.topComponentOpen(WindowManagerImpl.java:1226)
+	at org.openide.windows.TopComponent.open(TopComponent.java:497)
+	at org.openide.windows.TopComponent.open(TopComponent.java:477)
+	at org.word.editor.toolbar.RunAction$1.run(RunAction.java:203)
+	at java.lang.Thread.run(Thread.java:745)
+WARNING [null]: Last record repeated 7 more times.
+WARNING [org.netbeans.core.windows.WindowManagerImpl]
+java.lang.IllegalStateException: Problem in some module which uses Window System: Window System API is required to be called from AWT thread only, see http://core.netbeans.org/proposals/threading/
+	at org.netbeans.core.windows.WindowManagerImpl.warnIfNotInEDT(WindowManagerImpl.java:1764)
+	at org.netbeans.core.windows.WindowManagerImpl.topComponentIsOpened(WindowManagerImpl.java:1396)
+	at org.openide.windows.TopComponent.isOpened(TopComponent.java:541)
+	at org.openide.windows.TopComponent.isOpened(TopComponent.java:532)
+	at org.netbeans.core.windows.Central.addModeOpenedTopComponent(Central.java:780)
+	at org.netbeans.core.windows.ModeImpl.addOpenedTopComponent(ModeImpl.java:354)
+	at org.netbeans.core.windows.WindowManagerImpl.topComponentOpenAtTabPosition(WindowManagerImpl.java:1261)
+	at org.netbeans.core.windows.WindowManagerImpl.topComponentOpen(WindowManagerImpl.java:1226)
+	at org.openide.windows.TopComponent.open(TopComponent.java:497)
+	at org.openide.windows.TopComponent.open(TopComponent.java:477)
+	at org.word.editor.toolbar.RunAction$1.run(RunAction.java:203)
+	at java.lang.Thread.run(Thread.java:745)
+WARNING [org.netbeans.core.windows.WindowManagerImpl]
+java.lang.IllegalStateException: Problem in some module which uses Window System: Window System API is required to be called from AWT thread only, see http://core.netbeans.org/proposals/threading/
+	at org.netbeans.core.windows.WindowManagerImpl.warnIfNotInEDT(WindowManagerImpl.java:1764)
+	at org.netbeans.core.windows.WindowManagerImpl.topComponentID(WindowManagerImpl.java:1410)
+	at org.openide.windows.WindowManager.findTopComponentID(WindowManager.java:551)
+	at org.netbeans.core.windows.model.TopComponentSubModel.getID(TopComponentSubModel.java:382)
+	at org.netbeans.core.windows.model.TopComponentSubModel.containsTopComponent(TopComponentSubModel.java:278)
+	at org.netbeans.core.windows.model.DefaultModeModel.containsTopComponent(DefaultModeModel.java:348)
+	at org.netbeans.core.windows.model.DefaultModel.containsModeTopComponent(DefaultModel.java:911)
+	at org.netbeans.core.windows.Central.removeTopComponentFromOtherModes(Central.java:942)
+	at org.netbeans.core.windows.Central.addModeOpenedTopComponent(Central.java:786)
+	at org.netbeans.core.windows.ModeImpl.addOpenedTopComponent(ModeImpl.java:354)
+	at org.netbeans.core.windows.WindowManagerImpl.topComponentOpenAtTabPosition(WindowManagerImpl.java:1261)
+	at org.netbeans.core.windows.WindowManagerImpl.topComponentOpen(WindowManagerImpl.java:1226)
+	at org.openide.windows.TopComponent.open(TopComponent.java:497)
+	at org.openide.windows.TopComponent.open(TopComponent.java:477)
+	at org.word.editor.toolbar.RunAction$1.run(RunAction.java:203)
+	at java.lang.Thread.run(Thread.java:745)
+WARNING [null]: Last record repeated 6 more times.
+WARNING [org.netbeans.core.windows.WindowManagerImpl]
+java.lang.IllegalStateException: Problem in some module which uses Window System: Window System API is required to be called from AWT thread only, see http://core.netbeans.org/proposals/threading/
+	at org.netbeans.core.windows.WindowManagerImpl.warnIfNotInEDT(WindowManagerImpl.java:1764)
+	at org.netbeans.core.windows.WindowManagerImpl.topComponentID(WindowManagerImpl.java:1410)
+	at org.openide.windows.WindowManager.findTopComponentID(WindowManager.java:551)
+	at org.netbeans.core.windows.model.TopComponentSubModel.getID(TopComponentSubModel.java:382)
+	at org.netbeans.core.windows.model.TopComponentSubModel.addOpenedTopComponent(TopComponentSubModel.java:113)
+	at org.netbeans.core.windows.model.DefaultModeModel.addOpenedTopComponent(DefaultModeModel.java:156)
+	at org.netbeans.core.windows.model.DefaultModel.addModeOpenedTopComponent(DefaultModel.java:697)
+	at org.netbeans.core.windows.Central.addModeOpenedTopComponent(Central.java:788)
+	at org.netbeans.core.windows.ModeImpl.addOpenedTopComponent(ModeImpl.java:354)
+	at org.netbeans.core.windows.WindowManagerImpl.topComponentOpenAtTabPosition(WindowManagerImpl.java:1261)
+	at org.netbeans.core.windows.WindowManagerImpl.topComponentOpen(WindowManagerImpl.java:1226)
+	at org.openide.windows.TopComponent.open(TopComponent.java:497)
+	at org.openide.windows.TopComponent.open(TopComponent.java:477)
+	at org.word.editor.toolbar.RunAction$1.run(RunAction.java:203)
+	at java.lang.Thread.run(Thread.java:745)
+WARNING [org.netbeans.core.windows.WindowManagerImpl]
+java.lang.IllegalStateException: Problem in some module which uses Window System: Window System API is required to be called from AWT thread only, see http://core.netbeans.org/proposals/threading/
+	at org.netbeans.core.windows.WindowManagerImpl.warnIfNotInEDT(WindowManagerImpl.java:1764)
+	at org.netbeans.core.windows.WindowManagerImpl.topComponentRequestActive(WindowManagerImpl.java:1330)
+	at org.openide.windows.TopComponent.requestActive(TopComponent.java:861)
+	at org.word.editor.toolbar.RunAction$1.run(RunAction.java:204)
+	at java.lang.Thread.run(Thread.java:745)
+WARNING [org.netbeans.core.windows.WindowManagerImpl]
+java.lang.IllegalStateException: Problem in some module which uses Window System: Window System API is required to be called from AWT thread only, see http://core.netbeans.org/proposals/threading/
+	at org.netbeans.core.windows.WindowManagerImpl.warnIfNotInEDT(WindowManagerImpl.java:1764)
+	at org.netbeans.core.windows.WindowManagerImpl.topComponentID(WindowManagerImpl.java:1410)
+	at org.openide.windows.WindowManager.findTopComponentID(WindowManager.java:551)
+	at org.netbeans.core.windows.model.TopComponentSubModel.getID(TopComponentSubModel.java:382)
+	at org.netbeans.core.windows.model.TopComponentSubModel.setSelectedTopComponent(TopComponentSubModel.java:324)
+	at org.netbeans.core.windows.model.DefaultModeModel.setSelectedTopComponent(DefaultModeModel.java:241)
+	at org.netbeans.core.windows.model.DefaultModel.setModeSelectedTopComponent(DefaultModel.java:679)
+	at org.netbeans.core.windows.Central.activateModeTopComponent(Central.java:1794)
+	at org.netbeans.core.windows.WindowManagerImpl.topComponentRequestActive(WindowManagerImpl.java:1334)
+	at org.openide.windows.TopComponent.requestActive(TopComponent.java:861)
+	at org.word.editor.toolbar.RunAction$1.run(RunAction.java:204)
+	at java.lang.Thread.run(Thread.java:745)
+INFO [org.netbeans.TopSecurityManager]
+java.lang.Exception: Dangerous reflection access to sun.misc.SharedSecrets by class com.sun.javafx.tk.quantum.QuantumToolkit$17 detected!
+code location: jar:file:/home/xiao/NetBeansProjects/App/build/cluster/modules/ext/jfxrt.jar!/
+[catch] at org.netbeans.TopSecurityManager.checkMemberAccess(TopSecurityManager.java:447)
+	at java.lang.Class.checkMemberAccess(Class.java:2295)
+	at java.lang.Class.getMethod(Class.java:1675)
+	at com.sun.javafx.tk.quantum.QuantumToolkit$17.run(Unknown Source)
+	at com.sun.javafx.tk.quantum.QuantumToolkit$17.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at com.sun.javafx.tk.quantum.QuantumToolkit.intersectWithCurrentContext(Unknown Source)
+	at com.sun.javafx.tk.quantum.GlassStage.setSecurityContext(Unknown Source)
+	at javafx.stage.Window$9.invalidated(Unknown Source)
+	at javafx.beans.property.BooleanPropertyBase.markInvalid(Unknown Source)
+	at javafx.beans.property.BooleanPropertyBase.set(Unknown Source)
+	at javafx.stage.Window.setShowing(Unknown Source)
+	at javafx.stage.Window.show(Unknown Source)
+	at com.sun.javafx.stage.EmbeddedWindow.show(Unknown Source)
+	at javafx.embed.swing.JFXPanel.setSceneImpl(Unknown Source)
+	at javafx.embed.swing.JFXPanel.setScene(Unknown Source)
+	at org.word.editor.core.WebPanel$1.run(WebPanel.java:67)
+	at com.sun.javafx.application.PlatformImpl$4$1.run(Unknown Source)
+	at com.sun.javafx.application.PlatformImpl$4$1.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at com.sun.javafx.application.PlatformImpl$4.run(Unknown Source)
+	at com.sun.glass.ui.InvokeLaterDispatcher$Future.run(Unknown Source)
+	at com.sun.glass.ui.gtk.GtkApplication._runLoop(Native Method)
+	at com.sun.glass.ui.gtk.GtkApplication$3$1.run(Unknown Source)
+	at java.lang.Thread.run(Thread.java:745)
+Dangerous reflection access to sun.misc.JavaSecurityAccess by class com.sun.javafx.tk.quantum.QuantumToolkit$17 detected!
+code location: jar:file:/home/xiao/NetBeansProjects/App/build/cluster/modules/ext/jfxrt.jar!/
+Dangerous reflection access to sun.misc.SharedSecrets by class com.sun.javafx.tk.quantum.QuantumToolkit$17 detected!
+code location: jar:file:/home/xiao/NetBeansProjects/App/build/cluster/modules/ext/jfxrt.jar!/
+Dangerous reflection access to sun.misc.JavaSecurityAccess by class com.sun.javafx.tk.quantum.QuantumToolkit$17 detected!
+code location: jar:file:/home/xiao/NetBeansProjects/App/build/cluster/modules/ext/jfxrt.jar!/

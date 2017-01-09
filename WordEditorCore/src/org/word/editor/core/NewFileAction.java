@@ -15,6 +15,8 @@ import org.openide.awt.ActionReference;
 import org.openide.awt.ActionReferences;
 import org.openide.awt.ActionRegistration;
 import org.openide.util.NbBundle.Messages;
+import org.openide.windows.IOProvider;
+import org.openide.windows.InputOutput;
 import org.word.editor.toolbar.BuildAction;
 import org.word.editor.toolbar.FontPanel;
 import org.word.editor.toolbar.RunAction;
@@ -33,6 +35,7 @@ import org.word.editor.toolbar.RunAction;
 @Messages("CTL_NewFileAction=打开文件")
 public final class NewFileAction implements ActionListener {
     static Logger logger=Logger.getLogger(NewFileAction.class);
+    static InputOutput io=IOProvider.getDefault().getIO("Console",false);
     //打开
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -46,6 +49,7 @@ public final class NewFileAction implements ActionListener {
             File f=chooser.getSelectedFile();
             String filePath=f.getAbsolutePath();//文件的绝对路径
             logger.info("open file: "+f.getName());
+            io.getOut().println("open file: "+f.getName());
             //设置BuildAction,RunAction的FilePath,问题就是我在写入多个文件的时候
             BuildAction.file=f;
 //            BuildAction.update();

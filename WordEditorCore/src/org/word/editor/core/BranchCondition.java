@@ -59,6 +59,4 @@ public class BranchCondition {
     public String getBuildStep6() {
         return buildStep6;
     }
-    
-    
 }

@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import org.apache.log4j.Logger;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
@@ -22,6 +23,8 @@ import org.openide.awt.ActionReferences;
 import org.openide.awt.ActionRegistration;
 import org.openide.util.Exceptions;
 import org.openide.util.NbBundle.Messages;
+import org.openide.windows.IOProvider;
+import org.openide.windows.InputOutput;
 import org.word.editor.core.Contents;
 import org.word.editor.core.HtmlViewTopComponent;
 import org.word.editor.core.Template;
@@ -50,14 +53,19 @@ import org.word.editor.utilty.TemplateUtility;
 public final class RunAction implements ActionListener {
     static Logger logger=Logger.getLogger(RunAction.class);
     public static  File file=null;//被测源文件，与List一起提取覆盖信息
+    static InputOutput io=IOProvider.getDefault().getIO("Console",false);
     @Override
     public void actionPerformed(ActionEvent e) {
         logger.info("org.word.editor.toolbar.RunAction.actionPerformed()");
+        io.getOut().println("org.word.editor.toolbar.RunAction.actionPerformed()");
         if(file==null){//没有被测文件，提示用户需要选择
             JOptionPane.showMessageDialog(null, "请选择被测文件!");
             return ;
         }
-        LocalExec localExec=null;//命令的执行的路径，确定了不同的覆盖标准，在不同的路径下执行命令
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                        LocalExec localExec=null;//命令的执行的路径，确定了不同的覆盖标准，在不同的路径下执行命令
         String out="";//覆盖信息的输出路径
         String simpleName=file.getName().substring(0,file.getName().indexOf("."));//只有文件的名字无后缀
         //先执行build操作
@@ -85,9 +93,15 @@ public final class RunAction implements ActionListener {
 //                tp.requestActive();
 
 //              使用WebView
-                WebViewTopComponent tp1=new WebViewTopComponent("file:"+Contents.USER_DIR__STRING+"/statement/result/index.html");
-                tp1.open();
-                tp1.requestActive();
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        WebViewTopComponent tp1=new WebViewTopComponent("file:"+Contents.USER_DIR__STRING+"/statement/result/index.html");
+                        tp1.open();
+                        tp1.requestActive();
+                    }
+                });
+
             }
         }else if(Contents.Cov_Flag.equals(Contents.BRANCH)){//分支覆盖
             localExec=new LocalExec(Contents.USER_DIR__STRING+"/branch");
@@ -105,7 +119,7 @@ public final class RunAction implements ActionListener {
                     System.out.println(key+" "+conds[0].result+" "+conds[1].result);
                 }
                 Template template=new Template("Branch Coverage Report",file.getAbsolutePath(),"Branch Info");
-                int total=getTotalInfo(Contents.USER_DIR__STRING+"/branch/"+simpleName+".tmp.c");
+                int total=getTotalInfo(Contents.USER_DIR__STRING+"/branch/"+simpleName+".tmp.c")*2;//一个if包好两个分支
                 template.setTotal(total);
                 
                 String code=HtmlUtility.branchCov(maps, file.getAbsolutePath(), template);
@@ -114,11 +128,17 @@ public final class RunAction implements ActionListener {
 //                tp.setText(HtmlUtility.branchCov(maps, file.getAbsolutePath()));
 //                tp.open();
 //                tp.requestActive();
-                String covFile=Contents.USER_DIR__STRING+"/branch/"+simpleName+".html";
+                final String covFile=Contents.USER_DIR__STRING+"/branch/"+simpleName+".html";
                 TemplateUtility.branchCov(template, covFile, code);
-                WebViewTopComponent webtp=new WebViewTopComponent("file:"+covFile);
-                webtp.open();
-                webtp.requestActive();
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {//有关界面更新的放在新的线程中
+                       WebViewTopComponent webtp=new WebViewTopComponent("file:"+covFile);
+                       webtp.open();
+                       webtp.requestActive();
+                    }
+                });
+
             }
         }else if(Contents.Cov_Flag.equals(Contents.CONDITION)){//条件覆盖的执行
             localExec=new LocalExec(Contents.USER_DIR__STRING+"/condition");
@@ -147,11 +167,16 @@ public final class RunAction implements ActionListener {
                 template.setTotal(total);
                 
                 String code=HtmlUtility.conditionCov(covMap, file.getAbsolutePath(), template);//生成代码部分的覆盖信息
-                String covFile=Contents.USER_DIR__STRING+"/condition/"+simpleName+".html";
+                final String covFile=Contents.USER_DIR__STRING+"/condition/"+simpleName+".html";
                 TemplateUtility.branchCov(template, covFile, code);
-                WebViewTopComponent webtp=new WebViewTopComponent("file:"+covFile);
-                webtp.open();
-                webtp.requestActive();
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        WebViewTopComponent webtp=new WebViewTopComponent("file:"+covFile);
+                        webtp.open();
+                        webtp.requestActive();
+                    }
+                });
             }
         }else if(Contents.Cov_Flag.equals(Contents.BRANCH_CONDITION)){//条件分支覆盖
             localExec=new LocalExec(Contents.USER_DIR__STRING+"/branch_condition");
@@ -190,18 +215,71 @@ public final class RunAction implements ActionListener {
                 template.setTotal(total);
                 
                 String code=HtmlUtility.branchCondCov(map1,mcdc, file.getAbsolutePath(), template);//生成代码部分的覆盖信息
-                String covFile=Contents.USER_DIR__STRING+"/branch_condition/"+simpleName+".html";
+                final String covFile=Contents.USER_DIR__STRING+"/branch_condition/"+simpleName+".html";
                 TemplateUtility.branchCov(template, covFile, code);
-                WebViewTopComponent webtp=new WebViewTopComponent("file:"+covFile);
-                webtp.open();
-                webtp.requestActive();
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        WebViewTopComponent webtp=new WebViewTopComponent("file:"+covFile);
+                        webtp.open();
+                        webtp.requestActive();
+                    }
+                });
+
             }
+        }else if(Contents.Cov_Flag.equals(Contents.MCDC)){//MCDC覆盖
+//            localExec=new LocalExec(Contents.USER_DIR__STRING+"/mcdc");
+//            boolean result=runWithCases(localExec, null);
+//            if(result){
+//                String out_branch=Contents.USER_DIR__STRING+"/mcdc/out_branch.txt";
+//                String out_cond=Contents.USER_DIR__STRING+"/mcdc/out_cond.txt";
+//                
+//                Map<Integer, Map<Integer, List<CovStruct>>> mcdc_branch = MCDCUtility.getMCDC_branch(out_branch);
+//                Map<Integer, Map<Integer, List<CovStruct>>> mcdc_Cond = MCDCUtility.getMCDC_Cond(out_cond);
+//                
+//
+//                Template template=new Template("MC/DC Coverage Report",
+//                        file.getAbsolutePath(),"MC/DC Info");
+//                HtmlUtility.mcdcCov(mcdc_Cond, file.getAbsolutePath(), template);
+//            } 
+// -----------
+            localExec=new LocalExec(Contents.USER_DIR__STRING+"/branch_condition");
+            //在执行的时候确认的，不需要传入了输出路径
+            boolean result=runWithCases(localExec, null);
+            if(result){
+                String out_branch=Contents.USER_DIR__STRING+"/branch_condition/out_branch.txt";
+                String out_cond=Contents.USER_DIR__STRING+"/branch_condition/out_cond.txt";
+               //===============输出测试
+                Map<Integer, Map<Integer, List<CovStruct>>> mcdc = MCDCUtility.getMCDC_Cond(out_cond);
+
+                Map<Integer, Map<Integer, List<CovStruct>>> map1 = MCDCUtility.getMCDC_branch(out_branch);
+
+                Template template=new Template("MC/DC Coverage Report",file.getAbsolutePath(),"MC/DC Info");
+                int total=getTotalInfo(Contents.USER_DIR__STRING+"/branch_condition/"+simpleName+"_branch.tmp.c")+
+                        getTotalInfo(Contents.USER_DIR__STRING+"/branch_condition/"+simpleName+"_cond.tmp.c");
+                template.setTotal(total);
+                
+                String code=HtmlUtility.branchCondCov(map1,mcdc, file.getAbsolutePath(), template);//生成代码部分的覆盖信息
+                final String covFile=Contents.USER_DIR__STRING+"/branch_condition/"+simpleName+".html";
+                TemplateUtility.branchCov(template, covFile, code);
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        WebViewTopComponent webtp=new WebViewTopComponent("file:"+covFile);
+                        webtp.open();
+                        webtp.requestActive();
+                    }
+                });
+
+            }
+//----------------
         }
         else if(Contents.Cov_Flag.equals(Contents.ECMCDC)){//EC-MCDC
             localExec=new LocalExec(Contents.USER_DIR__STRING+"/ecmcdc");
             out=Contents.USER_DIR__STRING+"/condition/output.txt";
             boolean result=runWithCases(localExec, out);//将执行信息写入ｏｕｔ文件了
             if(result){
+                /*
                 Map<Integer, Map<Integer, List<CovStruct>>> mcdc = MCDCUtility.getMCDC_Cond(out);
                 for(Integer key:mcdc.keySet()){
                     System.out.println("Line: "+key);
@@ -212,8 +290,8 @@ public final class RunAction implements ActionListener {
                             System.out.println(struct.cs+" "+struct.result+" "+struct.condition);
                         }
                     }
-                }
-                /*
+                }*/
+                
                 //对含有覆盖信息的文件内容按照行排序
                 List<CovStruct> covStruct = FileUtility.getCovStruct(out);//处理插桩信息
                 //将执行信息处理成Ｍａｐ结构
@@ -228,7 +306,7 @@ public final class RunAction implements ActionListener {
                 WebViewTopComponent tp=new WebViewTopComponent("file:"+covFile.getAbsolutePath());
                 tp.open();
                 tp.requestActive();
-                 */
+                 
             }
         }else if(Contents.Cov_Flag.equals(Contents.PATH)){//简单路径覆盖，不会将复合条件进行拆分
             localExec=new LocalExec(Contents.USER_DIR__STRING+"/path");
@@ -246,10 +324,14 @@ public final class RunAction implements ActionListener {
             }
         }else {
             
-        }
+        }    
+            }//end-run
+        }).start();
+
     }//end-actionperformed
     
     private boolean runWithCases(LocalExec localExec,String out){
+        io.getOut().println("select the test suite!");
         JFileChooser chooser=new JFileChooser("选择测试用例集");
         int returnVal=chooser.showOpenDialog(null);
         if(returnVal==JFileChooser.APPROVE_OPTION){
@@ -261,11 +343,19 @@ public final class RunAction implements ActionListener {
             try {
                 br=new BufferedReader(new FileReader(casesFile));
                 String line="";
-                if(Contents.Cov_Flag.equals(Contents.BRANCH_CONDITION)){//分支条件覆盖标准，需要执行两种类型插桩程序
+                if(Contents.Cov_Flag.equals(Contents.BRANCH_CONDITION)
+                        ||Contents.Cov_Flag.equals(Contents.MCDC)){//分支条件覆盖标准，需要执行两种类型插桩程序
                     String exeName1=simpleName+"_branch.exe";//在分支条件覆盖时 需要重新定义输出文件的名称
                     String exeName2=simpleName+"_cond.exe";
-                    String out1=Contents.USER_DIR__STRING+"/branch_condition/out_branch.txt";
-                    String out2=Contents.USER_DIR__STRING+"/branch_condition/out_cond.txt";
+                    String dir="";
+                    if(Contents.Cov_Flag.equals(Contents.BRANCH_CONDITION)){
+                        dir="/branch_condition/";
+                    }
+                    if(Contents.Cov_Flag.equals(Contents.MCDC)){
+                        dir="/mcdc/";
+                    }
+                    String out1=Contents.USER_DIR__STRING+dir+"/out_branch.txt";
+                    String out2=Contents.USER_DIR__STRING+dir+"/out_cond.txt";
                     File file1=new File(out1);
                     File file2=new File(out2);
                     if(file1.exists()){//如果输出文件存在的话 需要删除
@@ -277,6 +367,7 @@ public final class RunAction implements ActionListener {
                     localExec.exe("chmod +x ./"+exeName1);
                     localExec.exe("chmod +x ./"+exeName2);
                     while((line=br.readLine())!=null){
+                        io.getOut().println("Input: "+line);
                         String cmd1="./"+exeName1+" "+line+" >> "+out1;
                         String cmd2="./"+exeName2+" "+line+" >> "+out2;
                         localExec.exe(cmd1);
@@ -292,6 +383,8 @@ public final class RunAction implements ActionListener {
                         outFile.delete();//如果已经存在输出文件，将其删除，写入本次的输出。
                     }
                     while((line=br.readLine())!=null){
+                        
+                        io.getOut().println("Input: "+line);
                         String cmd="./"+exeName+" "+line+" >> "+out;
                         localExec.exe(cmd);
                         localExec.exe("echo CASEEND >> "+out);

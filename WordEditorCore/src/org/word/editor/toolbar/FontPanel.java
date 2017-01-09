@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Logger;
 import org.openide.util.Lookup;
+import org.openide.windows.IOProvider;
+import org.openide.windows.InputOutput;
 import org.word.editor.core.Contents;
 import org.word.editor.core.WordTopComponent;
 
@@ -24,8 +26,9 @@ import org.word.editor.core.WordTopComponent;
 public class FontPanel extends javax.swing.JPanel implements Lookup.Provider{
     static Logger logger=Logger.getLogger(FontPanel.class);
     //为了给新建的topcomponent确定font fontsize等，确保同之前打开的组件的一样
-    public static String fontName="Abyssinica SIL";
-    public static int fontSize=12;
+    public static String fontName="Courier 10 pitch";
+    public static int fontSize=16;
+    static InputOutput io=IOProvider.getDefault().getIO("Console", false);
     /**
      * Creates new form FontPanel
      */
@@ -38,11 +41,15 @@ public class FontPanel extends javax.swing.JPanel implements Lookup.Provider{
         for(int i=0;i<fontName.length;i++){
             jComboBox1.addItem(fontName[i]);
         }
+        jComboBox1.setSelectedIndex(6);
+        //jComboBox1.setSelectedItem("Courier 10 pitch");//设置初始化的字体名称
         //初始化字号的大小
         jComboBox2.removeAllItems();
         for(int i=12;i<=20;i++){
             jComboBox2.addItem(String.valueOf(i));
         }
+        jComboBox2.setSelectedIndex(4);
+       // jComboBox2.setSelectedItem(16);
         //初始化覆盖标准的选择框
         jComboBox3.removeAllItems();
         String[] criterias={Contents.STATEMENT,Contents.BRANCH,Contents.CONDITION,
@@ -57,6 +64,7 @@ public class FontPanel extends javax.swing.JPanel implements Lookup.Provider{
             public void actionPerformed(ActionEvent e) {
                 String s=(String)jComboBox1.getSelectedItem();
                 logger.info("select the font: "+s);
+                io.getOut().println("select the font: "+s);
                 updateFontName(s);
             }
         });
@@ -65,6 +73,7 @@ public class FontPanel extends javax.swing.JPanel implements Lookup.Provider{
             public void actionPerformed(ActionEvent e) {
                 int size=Integer.valueOf((String)jComboBox2.getSelectedItem());
                 logger.info("select the font size: "+size);
+                io.getOut().println("select the font size: "+size);
                 updateFontSize(size);
             }
         });
@@ -72,6 +81,7 @@ public class FontPanel extends javax.swing.JPanel implements Lookup.Provider{
             @Override
             public void actionPerformed(ActionEvent e) {
                 logger.info("select the coverage criteria:"+jComboBox3.getSelectedItem());
+                io.getOut().println("select the coverage criteria:"+jComboBox3.getSelectedItem());
                 Contents.Cov_Flag=(String)jComboBox3.getSelectedItem();//设置全局选中的覆盖标准
             }
         });

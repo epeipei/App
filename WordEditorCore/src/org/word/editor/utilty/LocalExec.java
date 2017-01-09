@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import org.apache.log4j.Logger;
+import org.openide.windows.IOProvider;
+import org.openide.windows.InputOutput;
 
 /**
  *
@@ -18,6 +20,7 @@ import org.apache.log4j.Logger;
  */
 public class LocalExec {
     static Logger logger=Logger.getLogger(LocalExec.class);
+    static InputOutput io=IOProvider.getDefault().getIO("Console", false);
     String[] cmds;
     String path;//执行命令的路径，但是在这里先不指定，可以让用户配置gcc的路径，然后填写到这里
     
@@ -39,6 +42,7 @@ public class LocalExec {
     }
     private int runCommand(String[] simpleCmd) throws Exception{
         logger.info(cmds[2]);
+       // io.getOut().println(cmds[2]);
         Process process=Runtime.getRuntime().exec(simpleCmd);
         //error message
         StreamGobbler errorGobbler=new StreamGobbler(process.getErrorStream(),"ERROR");
@@ -68,6 +72,7 @@ public class LocalExec {
                 String line=null;
                 while((line=br.readLine())!=null){
                     System.out.println("out: "+line); //输出 命令执行结果
+                    io.getOut().println("out: "+line);
                    //logger.info("command out: "+line);
                 }
                 br.close();

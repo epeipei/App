@@ -4,29 +4,29 @@ bool judge(int a,int b,int c){
 	if((a+b>c&&b+c>a&&a+c>b)?if_1(4,"a+b>c&&b+c>a&&a+c>b"):if_0(4,"a+b>c&&b+c>a&&a+c>b")){
 		if((a==b)?if_1(5,"a==b"):if_0(5,"a==b")){
 			if((b==c)?if_1(6,"b==c"):if_0(6,"b==c")){
-				printf("等边三角形\n");
+				printf("Equilateral triangle!\n");
 			}else{
-				printf("等腰三角形\n");
+				printf("Isosceles triangle!\n");
 			}
 		}else{
 			if((b==c)?if_1(12,"b==c"):if_0(12,"b==c")){
-				printf("等腰三角形\n");
+				printf("Isosceles triangle!\n");
 			}else{
 				if((c==a)?if_1(15,"c==a"):if_0(15,"c==a")){
-					printf("等腰三角形\n");
+					printf("Isosceles triangle!\n");
 				}else{
-					printf("不等边三角形\n");
+					printf("Not Equilateral triangle!\n");
 				}
 			}
 		}
 	}else{
-		printf("不构成三角形\n");
+		printf("Does not constitute a triangle!\n");
 	}
 	return 0;
 }
 int main(int argc,char *argv[]){
 	if((argc<4)?if_1(28,"argc<4"):if_0(28,"argc<4")){
-		printf("需要三个参数\n");
+		printf("Need three args!\n");
 		return 0;
 	}
 	int a=atoi(argv[1]);

@@ -1,9 +1,18 @@
-不构成三角形
-0等边三角形
-0等腰三角形
-0不等边三角形
-0不等边三角形
-0不等边三角形
-0不构成三角形
-0不构成三角形
-0
+Does not constitute a triangle!
+0CASEEND
+Equilateral triangle!
+0CASEEND
+Isosceles triangle!
+0CASEEND
+Not Equilateral triangle!
+0CASEEND
+Not Equilateral triangle!
+0CASEEND
+Not Equilateral triangle!
+0CASEEND
+Does not constitute a triangle!
+0CASEEND
+Does not constitute a triangle!
+0CASEEND
+Does not constitute a triangle!
+0CASEEND

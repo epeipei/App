@@ -53,7 +53,7 @@ public class TemplateUtility {
 "            <td width=\"35%\" class=\"headerValue\">"+template.getTestPath()+"</td>\n" +
 "            <td width=\"5%\"></td>\n" +
 "            <td width=\"15%\"></td>\n" +
-"            <td width=\"10%\" class=\"headerCovTableHead\">Hit</td>\n" +
+"            <td width=\"10%\" class=\"headerCovTableHead\">Covered</td>\n" +
 "            <td width=\"10%\" class=\"headerCovTableHead\">Total</td>\n" +
 "            <td width=\"15%\" class=\"headerCovTableHead\">Coverage</td>\n" +
 "          </tr>\n" +

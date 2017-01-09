@@ -19,6 +19,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.apache.log4j.Logger;
 import org.openide.util.Exceptions;
+import org.openide.windows.IOProvider;
+import org.openide.windows.InputOutput;
 import org.word.editor.core.Contents;
 import org.word.editor.core.Template;
 import org.word.editor.utilty.FileUtility.Cond;
@@ -29,6 +31,7 @@ import org.word.editor.utilty.FileUtility.Cond;
  */
 public class HtmlUtility {
     private static Logger logger=Logger.getLogger(HtmlUtility.class);
+    static InputOutput io=IOProvider.getDefault().getIO("Console", false);
     //根据覆盖信息List<CovStruct>和被测源文件生成html报告----   EC-MC/DC
     //<用特殊字符&lt;来代替，防止在解析的时候出错。
     /**
@@ -41,6 +44,7 @@ public class HtmlUtility {
     public static File generateHtml(Map<Integer,Map<Integer,Cond[]>> covs,String sourcePath,String covPath){
         if(covs.size()==0){//未生成覆盖信息
             logger.info("No coverlay analysis file generated!");
+            io.getOut().println("No coverlay analysis file generated!");
         }
         File covHtml=new File(covPath);
 //        StringBuilder sb=new StringBuilder("<html><body>");
@@ -288,8 +292,8 @@ public class HtmlUtility {
 "    </tr>\n" +
 "  </table>\n" +
 "  <br>\n");
-        template.setHit(hit);
-        template.setPart(part);
+        template.setHit(hit*2+part);//hit×2+part是对分支覆盖的部分
+        template.setPart(part);//只覆盖了真或者假分支
         return sb.toString();
     }
     /*
@@ -520,6 +524,52 @@ public class HtmlUtility {
         template.setPart(part);
         return sb.toString();
     }//end-branchCondCov
+    
+    /*
+    生成MC/DC的覆盖分析文件，对每个条件生成逆波兰表达式，在每个条件标记上各个case的结果；
+    并且生成表达式树，树的每个节点上标记上各个条件的正确错误
+    */
+    public static void mcdcCov(Map<Integer,Map<Integer,List<CovStruct>>> map,String source,Template template){
+        BufferedReader br=null;
+        try {
+            br=new BufferedReader(new FileReader(new File(source)));
+            String line="";
+            int currentLine=0;
+            while((line=br.readLine())!=null){
+                currentLine++;
+               // System.out.println("==========: "+line);
+                if(map.containsKey(currentLine)){//含有该行的覆盖信息
+                    System.out.println("Contains: "+line);
+                    int f=line.indexOf("(");//找到第一个（，确定整个分支的结果
+                    int l=line.lastIndexOf(")");
+                    String exp=line.substring(f+1,l);
+                    System.out.println("EXP== "+exp);
+                    List<String> postExp=Expression.getReverseExp(exp);
+                    for(String s:postExp){
+                        System.out.println(s);
+                    }
+                        //key是条件在该表达式中的编号，从1 开始,List 中1表示true 2表示任意值
+                    Map<Integer, List<Integer>> boolMap = Expression.getBoolList(exp, map.get(currentLine));
+                    TreeNode root=Expression.getExpTree(postExp, boolMap);
+                    Expression.traverseTree(root);
+                    
+                    
+//                    for(Integer key:boolMap.keySet()){
+//                        List<Integer> list=boolMap.get(key);
+//                        System.out.println("------- :"+key);
+//                        for(Integer i:list){
+//                            System.out.print(i+" ");
+//                        }
+//                        System.out.println();
+//                    }
+                }else {
+                    System.out.println("Not Contains： "+currentLine);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     
 }
 /*

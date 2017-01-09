@@ -17,11 +17,14 @@ import org.openide.awt.ActionReference;
 import org.openide.awt.ActionReferences;
 import org.openide.awt.ActionRegistration;
 import org.openide.util.NbBundle.Messages;
+import org.openide.windows.IOProvider;
+import org.openide.windows.InputOutput;
 import org.word.editor.core.Branch;
 import org.word.editor.core.BranchCondition;
 import org.word.editor.core.Condition;
 import org.word.editor.core.Contents;
 import org.word.editor.core.ECMCDC;
+import org.word.editor.core.MCDC;
 import org.word.editor.core.Statement;
 import org.word.editor.utilty.LocalExec;
 
@@ -40,6 +43,7 @@ import org.word.editor.utilty.LocalExec;
 @Messages("CTL_BuildAction=编译")
 public final class BuildAction implements ActionListener {
     static Logger logger=Logger.getLogger(BuildAction.class);
+    static InputOutput io=IOProvider.getDefault().getIO("Console", false);
     /*
     在用户改变选择的文件时，file字段改变，同时其他的相关字段也要改变,在各个build文件中，将file静态引入
     */
@@ -48,11 +52,16 @@ public final class BuildAction implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         logger.info("org.word.editor.toolbar.BuildAction.actionPerformed()");
+        io.getOut().println("org.word.editor.toolbar.BuildAction.actionPerformed()");
         if(file==null){
+            //InputOutput io=IOProvider.getDefault().getIO("test", true);
             JOptionPane.showMessageDialog(null, "请选择被测文件！");
             return ;
         }
-        //根据用户选择的覆盖准则进行编译选项的设置
+        new Thread(new Runnable() {//在新的线程执行，防止界面卡住
+            @Override
+            public void run() {
+                        //根据用户选择的覆盖准则进行编译选项的设置
         if(Contents.Cov_Flag.equals(Contents.STATEMENT)){//语句覆盖
             Statement statement=new Statement();
             LocalExec localExec=new LocalExec(Contents.USER_DIR__STRING+"/statement");
@@ -87,6 +96,24 @@ public final class BuildAction implements ActionListener {
             localExec.exe(branch_condition.getBuildStep5());
             localExec.exe(branch_condition.getBuildStep6());
             
+        }else if(Contents.Cov_Flag.equals(Contents.MCDC)){//MC/DC覆盖
+//            MCDC mcdc=new MCDC();
+//            LocalExec localExec=new LocalExec(Contents.USER_DIR__STRING+"/mcdc");
+//            localExec.exe(mcdc.getBuildStep1());
+//            localExec.exe(mcdc.getBuildStep2());
+//            localExec.exe(mcdc.getBuildStep3());
+//            localExec.exe(mcdc.getBuildStep4());
+//            localExec.exe(mcdc.getBuildStep5());
+//            localExec.exe(mcdc.getBuildStep6());
+
+            BranchCondition branch_condition=new BranchCondition();
+            LocalExec localExec=new LocalExec(Contents.USER_DIR__STRING+"/branch_condition");
+            localExec.exe(branch_condition.getBuildStep1());
+            localExec.exe(branch_condition.getBuildStep2());
+            localExec.exe(branch_condition.getBuildStep3());
+            localExec.exe(branch_condition.getBuildStep4());
+            localExec.exe(branch_condition.getBuildStep5());
+            localExec.exe(branch_condition.getBuildStep6());
         }
         else if(Contents.Cov_Flag.equals(Contents.ECMCDC)){
             ECMCDC ecmcdc=new ECMCDC();
@@ -104,8 +131,12 @@ public final class BuildAction implements ActionListener {
               localExec.exe(statement.getBuildStep2());
         }else {
             
-        }
+        }  
         JOptionPane.showMessageDialog(null, "插桩并且编译完成！");
+         }//end-run
+            
+        }).start();
+        
     }
 
     
