@@ -152,7 +152,7 @@ typedef unsigned int flex_uint32_t;
 #endif /* __ia64__ */
 #endif
 
-/* The state buf must be large enough to hold one state per character in the main_1_1_1_1_1 buffer.
+/* The state buf must be large enough to hold one state per character in the main_1_1_1_1_1_1_1_1 buffer.
  */
 #define YY_STATE_BUF_SIZE   ((YY_BUF_SIZE + 2) * sizeof(yy_state_type))
 
@@ -711,7 +711,7 @@ extern int yylex (void);
 #define YY_RULE_SETUP \
 	YY_USER_ACTION
 
-/** The main_1_1_1_1_1 scanner function which does all the work.
+/** The main_1_1_1_1_1_1_1_1 scanner function which does all the work.
  */
 YY_DECL
 {
@@ -1791,7 +1791,7 @@ static int yy_init_globals (void)
     (yy_init) = 0;
     (yy_start) = 0;
 
-/* Defined in main_1_1_1_1_1.c */
+/* Defined in main_1_1_1_1_1_1_1_1.c */
 #ifdef YY_STDINIT
     yyin = stdin;
     yyout = stdout;
@@ -1879,7 +1879,7 @@ void yyfree (void * ptr )
 #line 105 "if.l"
 
 
-int main_1_1_1_1_1(){
+int main_1_1_1_1_1_1_1_1(){
 	yylex();
 	printf("//%d\n",total);
 	return 0;

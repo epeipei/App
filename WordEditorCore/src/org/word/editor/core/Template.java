@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -21,6 +22,8 @@ public class Template {
     private int total=0;//需要被覆盖的总体项
     private int hit=0;//覆盖项
     private int part=0;//部分覆盖
+    
+    private String suitePathString="";
 
     public Template(String title,String testPath,String criterion) {
         this.title=title;
@@ -85,6 +88,14 @@ public class Template {
 
     public void setPart(int part) {
         this.part = part;
+    }
+
+    public String getSuitePathString() {
+        return suitePathString;
+    }
+
+    public void setSuitePathString(String suitePathString) {
+        this.suitePathString = suitePathString;
     }
     
     

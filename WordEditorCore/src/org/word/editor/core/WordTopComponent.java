@@ -77,7 +77,7 @@ public final class WordTopComponent extends TopComponent implements Observer{
         textArea.requestFocus();;
         textArea.setSelectionStart(10);
         textArea.setSelectionEnd(10);
-        textArea.setSelectionColor(Color.BLUE);
+       // textArea.setSelectionColor(Color.BLUE);
     }
 
     /**

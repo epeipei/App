@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?><module codename="org.word.editor.core">
-    <module_version install_time="1483967464243" last="true" origin="installer" specification_version="1.0">
+    <module_version install_time="1484831167865" last="true" origin="installer" specification_version="1.0">
         <file crc="3402755310" name="config/Modules/org-word-editor-core.xml"/>
         <file crc="805047365" name="modules/ext/jfxrt.jar"/>
         <file crc="104118116" name="modules/ext/log4j-1.2-api-2.7.jar"/>
         <file crc="972798868" name="modules/ext/log4j-1.2.16.jar"/>
         <file crc="498662583" name="modules/ext/rsyntaxtextarea-2.5.8.jar"/>
-        <file crc="707202447" name="modules/org-word-editor-core.jar"/>
+        <file crc="3295145632" name="modules/org-word-editor-core.jar"/>
     </module_version>
 </module>

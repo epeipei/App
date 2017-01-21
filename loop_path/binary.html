@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title></title>
+  <link rel="stylesheet" type="text/css" href="./css/gcov.css">
+  <link href="http://cdn.bootcss.com/highlight.js/8.0/styles/default.min.css" rel="stylesheet">
+</head>
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">Loop-Path Coverage Report</td></tr>
+    <tr><td class="ruler"><img src="./css/glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue">/home/xiao/Test/lex/source/binary.c</td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Covered</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage Rate</td>
+          </tr>
+          <tr>
+            <td class="headerItem">TestSuitPath:</td>
+            <td class="headerValue">/home/xiao/Test/binaryTest</td>
+            <td></td>
+            <td class="headerItem">Loop-Path Info</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntryMed">100.00%</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2017-01-14</td>
+            <td></td>
+          </tr>
+          <tr><td><img src="./css/glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="./css/glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+<table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td><pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<code>
+<a name="1"><span class="lineNum">       1 </span>  :  <span>#include&lt;stdio.h></span>
+<span class="lineNum">       2 </span>  :  <span>int binarySearch(int array[],int size,int target){</span>
+<span class="lineNum">       3 </span>  :  	<span>int low=0,high=size-1;</span>
+<span class="lineNum">       4 </span>  :  	while(low&lt;=high){
+<span class="lineNum">       5 </span>  :  		<span>int mid=(low+high)/2;</span>
+<span class="lineNum">       6 </span>  :  		if(array[mid]==target){
+<span class="lineNum">       7 </span>  :  				<span>return mid;</span>
+<span class="lineNum">       8 </span>  :  		}else if(<span title="not reach the export" style="background:#BDBDBD">array[mid]>target</span>){
+<span class="lineNum">       9 </span>  :  				<span>high=mid-1;</span>
+<span class="lineNum">       10 </span>  :  		<span>}else{</span>
+<span class="lineNum">       11 </span>  :  				<span>low=mid+1;</span>
+<span class="lineNum">       12 </span>  :  		<span>}</span>
+<span class="lineNum">       13 </span>  :  	<span>}</span>
+<span class="lineNum">       14 </span>  :  	<span>return -1;</span>
+<span class="lineNum">       15 </span>  :  <span>}</span>
+<span class="lineNum">       16 </span>  :  <span>int main(int argc,char *argv[]){</span>
+<span class="lineNum">       17 </span>  :  	<span>int size=argc-2;</span>
+<span class="lineNum">       18 </span>  :  	<span>int a[size];</span>
+<span class="lineNum">       19 </span>  :  	<span>printf("size= %d\n",size);</span>
+<span class="lineNum">       20 </span>  :  	<span>int i=0;</span>
+<span class="lineNum">       21 </span>  :  	for(i=0;i&lt;size;i++){
+<span class="lineNum">       22 </span>  :  		<span>a[i]=atoi(argv[i+1]);</span>
+<span class="lineNum">       23 </span>  :  		<span>printf("a[%d]= %d\n",i,a[i]);</span>
+<span class="lineNum">       24 </span>  :  	<span>}</span>
+<span class="lineNum">       25 </span>  :  	<span>int target=atoi(argv[i+1]);</span>
+<span class="lineNum">       26 </span>  :  	<span>printf("%d\n",binarySearch(a,size,target));</span>
+<span class="lineNum">       27 </span>  :  <span></span>
+<span class="lineNum">       28 </span>  :      <span>return 0;</span>
+<span class="lineNum">       29 </span>  :  <span>}</span>
+<span class="lineNum">       30 </span>  :  <span></span>
+<span class="lineNum">       31 </span>  :  <span></span>
+</code>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+<table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="./css/glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+  <br>
+
+<script src="http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>
+<script >hljs.initHighlightingOnLoad();</script>  
+</body>
+</html>

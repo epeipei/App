@@ -1,0 +1,102 @@
+
+mycov 28 1 0 argc<4
+
+mycov 4 1 1 a+b>c
+
+mycov 4 2 -1 b+c>a
+Does not constitute a triangle!
+0CASEEND
+
+mycov 28 1 0 argc<4
+
+mycov 4 1 1 a+b>c
+
+mycov 4 2 1 b+c>a
+
+mycov 4 3 1 a+c>b
+
+mycov 5 1 0 a==b
+
+mycov 6 1 0 b==c
+Equilateral triangle!
+0CASEEND
+
+mycov 28 1 0 argc<4
+
+mycov 4 1 1 a+b>c
+
+mycov 4 2 1 b+c>a
+
+mycov 4 3 1 a+c>b
+
+mycov 5 1 0 a==b
+
+mycov 6 1 -1 b==c
+Isosceles triangle!
+0CASEEND
+
+mycov 28 1 0 argc<4
+
+mycov 4 1 1 a+b>c
+
+mycov 4 2 1 b+c>a
+
+mycov 4 3 1 a+c>b
+
+mycov 5 1 -1 a==b
+
+mycov 12 1 -1 b==c
+
+mycov 15 1 1 c==a
+Not Equilateral triangle!
+0CASEEND
+
+mycov 28 1 0 argc<4
+
+mycov 4 1 1 a+b>c
+
+mycov 4 2 1 b+c>a
+
+mycov 4 3 1 a+c>b
+
+mycov 5 1 -1 a==b
+
+mycov 12 1 -1 b==c
+
+mycov 15 1 1 c==a
+Not Equilateral triangle!
+0CASEEND
+
+mycov 28 1 0 argc<4
+
+mycov 4 1 1 a+b>c
+
+mycov 4 2 1 b+c>a
+
+mycov 4 3 1 a+c>b
+
+mycov 5 1 1 a==b
+
+mycov 12 1 1 b==c
+
+mycov 15 1 -1 c==a
+Not Equilateral triangle!
+0CASEEND
+
+mycov 28 1 0 argc<4
+
+mycov 4 1 -1 a+b>c
+Does not constitute a triangle!
+0CASEEND
+
+mycov 28 1 0 argc<4
+
+mycov 4 1 -1 a+b>c
+Does not constitute a triangle!
+0CASEEND
+
+mycov 28 1 0 argc<4
+
+mycov 4 1 0 a+b>c
+Does not constitute a triangle!
+0CASEEND

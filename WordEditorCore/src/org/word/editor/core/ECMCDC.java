@@ -13,13 +13,15 @@ import static org.word.editor.toolbar.BuildAction.file;
 public class ECMCDC {
     private String buildStep1;
     private String buildStep2;
+    private String buildStep3;
     
     public ECMCDC(){
         String simpleName=file.getName().substring(0,file.getName().indexOf("."));//无后缀的文件名称
         String pitchName=simpleName+".tmp.c";
         String exeName=simpleName+".exe";
         buildStep1="./ecmcdc.exe < "+file.getAbsolutePath()+" > "+pitchName;
-        buildStep2="gcc lex.yy.c "+pitchName+" -o "+exeName+" -lfl";
+        buildStep2="sed -i \"s/main/main_1/g\" ./lex.yy.c";
+        buildStep3="gcc lex.yy.c "+pitchName+" -o "+exeName+" -lfl";
     }
     
     public String getBuildStep1(){
@@ -37,8 +39,12 @@ public class ECMCDC {
     public void setBuildStep2(String step2){
         this.buildStep2=step2;
     }
-    
-    
-    
-    
+
+    public String getBuildStep3() {
+        return buildStep3;
+    }
+
+    public void setBuildStep3(String buildStep3) {
+        this.buildStep3 = buildStep3;
+    }
 }

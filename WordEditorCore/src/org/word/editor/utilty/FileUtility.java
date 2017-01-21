@@ -191,13 +191,16 @@ public class FileUtility {
             }
             int i=-1;
             String condition="";
-            if(struct.result==0){
+            if(struct.result==0){//表示达到了假分支
                 i=0;
                 condition=struct.condition;
             }else{
                 i=1;
                 condition=struct.condition;
             }
+            /**
+             * Cond的下标0表示假分支，1表示真分支；true表示达到相应分支，false表示未达到
+             */
             map.get(cs)[i].result=true;
             map.get(cs)[i].condition=condition;
         }

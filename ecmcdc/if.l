@@ -3,6 +3,7 @@
 #include<string.h>
 #include<stdbool.h>
 int line=1;
+int total=0;
 int cs=0;//表示每一行的条件的个数，计数
 bool comment_flag=false;//for /* comment
 void func(char *a,char *b){
@@ -72,10 +73,15 @@ RCC		{EXP}{ROP}{EXP}
 			char *l=strtok(rcc,op);
 			char *r=strtok(NULL,op);
 			cs++;
+			total++;
 			printf("(cond(%d,%d,%s,%s,\"%s\"),%s)",line,cs,l,r,yytext,yytext);
 		}else{
 			printf("%s",yytext);
 		}
 	}
 %%
-
+int main(){
+	yylex();
+	printf("//%d\n",total);
+	return 0;
+}

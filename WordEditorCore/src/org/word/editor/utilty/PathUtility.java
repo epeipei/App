@@ -10,7 +10,11 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
+import org.openide.windows.IOProvider;
+import org.openide.windows.InputOutput;
 
 /**
  *
@@ -20,6 +24,7 @@ import java.util.Map;
  在路径覆盖测试时，获取程序的控制流图的cfg，并且对cfg进行处理的类
 */
 public class PathUtility {
+    private static InputOutput io=IOProvider.getDefault().getIO("Console",false);
     /*
     将使用-fdump-tree-cfg处理过之后的文件传入，构造成Map存储图，ｋｅｙ是每个节点的ｌａｂｅｌ
     */
@@ -37,7 +42,7 @@ public class PathUtility {
             while((line=br.readLine())!=null){
                 num++;
                 line=line.trim();//去除多余的空格；
-                if(line.startsWith("return")){//终结
+                if(line.startsWith("return")){//终结,简单处理，默认遇到的第一个韩式是待测函数
                     currentNode.isEnd=true;
                     break;
                 }
@@ -184,4 +189,32 @@ public class PathUtility {
             }
         }
     }
-}
+    public static int getCoveragedPath(String outPath){
+        BufferedReader br=null;
+        Set<String> unique=new HashSet<String>();//存放不同的执行路径
+        try {
+            br=new BufferedReader(new FileReader(new File(outPath)));
+            String line="";
+            StringBuilder sb=new StringBuilder();
+            while((line=br.readLine())!=null){
+                if(line.startsWith("mycov")){//插桩行
+                    sb.append(line+" ");
+                }
+                if(line.contains("CASEEND")){//一个case执行结束
+                    unique.add(sb.toString());
+                    sb=new StringBuilder();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        io.getOut().println("paths:");
+        for(String s:unique){
+            io.getOut().println(s);
+        }
+        return unique.size();
+    }
+    public static void main(String[] args){
+        System.out.println("");
+    }
+} 
